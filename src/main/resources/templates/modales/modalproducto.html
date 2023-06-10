@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<body>
+
+
+
+        <!-- Modal Productos-->
+        <div th:fragment="modalproducto"  id="modale-pro" class="modale ocultar" >
+          <div class="modale-header">
+              
+              <h5> <div id="Tituloprod"></div>   <span id="close-pro">X</span></h5>
+          </div>
+          <div class="modale-body">
+              <form action="" id="frmproducto" name="frmproducto" enctype="multipart/form-data">
+                <label for="">Ingresar Foto :</label>
+                <di id="imgcon"><img style="display: none;"  src="" alt="" id="imagedefe"></di>
+                <input type="file" name="" id="arch">
+  
+  
+ 				 <input type="hidden" name="" id="nomfoto">
+                <label for="">Ingresar Nombre Producto :</label>
+                <input type="text" name="" id="txtproducto">
+  
+                <label for="">Ingresar Cuantas Porciones:</label>
+                <input type="number" name="" id="txtporciones" oninput="actualizarEntera()">
+  
+                <label for="">Ingresar Tortas Enteras:</label>
+                <input type="number" name="" id="txtentera" oninput="actualizarPorciones()">
+  
+                <label for="">Precio de Porcion:</label>
+                <input type="number" name="" id="txtprecioporcion">
+  
+                <label for="">Precio Torta Completa :</label>
+                <input type="number" name="" id="txtprecioentera">
+                
+                <label for="">Codigo :</label>
+              	<input type="text" name="" id="txtcodigo">
+              
+              	<input type="hidden" id="hddidproducto">
+              	<button class="btn btn-success btnmod" type="submit" id="btnenviaractualizacionProducto"> Actualizar</button>
+               <button class="btn btn-success btnmod" type="submit" id="btnGuardarProducto"> Enviar</button>
+              </form>
+          </div>
+        </div>
+        <!-- Modal-->
+        
+        
+              <!-- Modal eliminar -->
+            <div th:fragment="eliminarproducto" id="modale-preguntaprod" class="modale ocultar" >
+        <div class="modale-header">
+          
+            <h5> <div id="Tituloprod">Eliminando Cliente</div>   <span id="close-pregupro">X</span></h5>
+        </div>
+        <div class="modale-body">
+        <div>
+        	<label id="mensajeeliminarprodu"></label>
+					<input type="hidden" id="hddideliminarproducto" value="0">
+						<button type="button" class="btn btn-primary btneliminarpro"
+						>Eliminar</button>
+        </div>
+        </div>
+      </div>
+      
+       <!-- Modal eliminar -->
+        
+
+        
+        
+        
+
+
+</body>
+</html>

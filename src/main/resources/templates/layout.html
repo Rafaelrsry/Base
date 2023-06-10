@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Aempa Pasteleria</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/css/normalize.css}" >
+  	<link rel="stylesheet" th:href="@{/css/css/style.css}" >
+  	<link rel="stylesheet" th:href="@{/css/fontawesome/all.css}">
+</head>
+<body>
+
+</body>
+
+<footer th:fragment="footer">
+  <script  th:src="@{/js/jquery/jquery-3.6.4.min.js}" type="text/javascript"> </script>
+  <script  th:src="@{/js/scripts/clientes.js}" type="text/javascript"> </script>
+    <script  th:src="@{/js/scripts/empleados.js}" type="text/javascript"> </script>
+      <script th:src="@{js/scripts/productos.js}" type="text/javascript"></script>
+      <script th:src="@{js/scripts/ventas.js}" type="text/javascript"></script>
+  <script  th:src="@{/js/bootstrap/bootstrap.bundle.js}" type="text/javascript"> </script>
+  <script  th:src="@{/js/scripts/scripts.js}" type="text/javascript"> </script>
+</footer>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+ <!-- Modal Clientes-->
+      <div th:fragment="modalcliente" id="modale-cli" class="modale ocultar" >
+        <div class="modale-header">
+          
+            <h5> <div id="Titulo"></div>   <span id="close-cli">X</span></h5>
+        </div>
+        <div class="modale-body">
+            <form action="">
+              <label for="">Ingresar Nombres :</label>
+              <input type="text" name="" id="txtNombreCliente">
+
+              <label for="">Ingresar Apellidos :</label>
+              <input type="text" name="" id="txtApellidoCliente">
+
+              <label for="">Ingresar Dni :</label>
+              <input type="text" name="" id="txtDniCliente">
+
+              <label for="">Ingresar Direccion :</label>
+              <input type="text" name="" id="txtDireccionCliente">
+
+              <label for="">Ingresar Distrito :</label>
+              <input type="text" name="" id="txtDistritoCliente">
+
+              <label for="">Ingresar Telefono :</label>
+              <input type="text" name="" id="txtTelefonoCliente">
+              
+              <input type="hidden" id="hddidcliente">
+             <button class="btn btn-success btnmod" type="button" id="btnGuardarCliente"> Enviar</button>
+            </form>
+        </div>
+      </div>
+      
+      
+      <!-- Modal eliminar -->
+            <div th:fragment="eliminarcliente" id="modale-pregunta" class="modale ocultar" >
+        <div class="modale-header">
+          
+            <h5> <div id="Titulo">Eliminando Cliente</div>   <span id="close-pregu">X</span></h5>
+        </div>
+        <div class="modale-body">
+        <div>
+        	<label id="mensajeeliminar"></label>
+					<input type="hidden" id="hddideliminarcliente" value="0">
+						<button type="button" class="btn btn-primary btneliminar"
+						>Eliminar</button>
+        </div>
+        </div>
+      </div>
+      
+       <!-- Modal eliminar -->
+
+
+</body>
+</html>

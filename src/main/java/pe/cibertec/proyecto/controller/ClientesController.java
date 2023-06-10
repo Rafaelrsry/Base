@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import pe.cibertec.proyecto.model.db.Clientes;
 import pe.cibertec.proyecto.request.ClienteRequest;
@@ -40,7 +42,7 @@ public class ClientesController {
 	public ResultadoResponse registrarCliente(
 			@RequestBody ClienteRequest clienteRequest
 			) {
-		String mensaje ="Cliente Registrado Correctamente";
+		String mensaje ="Envio Exitoso";
 		Boolean respuesta = true;
 		try {			
 			//Se puede aplicar el patrón Builder en estos objetos
@@ -60,7 +62,7 @@ public class ClientesController {
 			
 			
 		}catch(Exception ex) {
-			mensaje = "Cliente no registrado";
+			mensaje = "No se realizaron modificaciones";
 			respuesta = false;
 		}
 		return ResultadoResponse.builder()

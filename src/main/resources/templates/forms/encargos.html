@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<body>
+
+      <div th:fragment="encargos" id="encargos"  style="display: none;">
+
+        
+        <div class="mb-3">
+          <h1 class="text-center"> Encargos <span> <img src="img/paquete.png" th:src="@{/img/paquete.png}" alt=""></span></h1>
+
+       
+
+      </div>
+
+      <div class="table-responsive">
+        <table class="table  table-hover table-bordered vertscrol">
+          <thead>
+            <tr>
+              <th scope="col">IdEncargo</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Anticipo</th>
+              <th scope="col">Fecha Creacion</th>
+             
+              <th scope="col">Estado</th>
+              
+              
+              
+              <th scope="col" colspan="2">Opciones</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr class="">
+              <th scope="row">1</th>
+              <td>Torta Chocolate</td>
+              <td>Rafael rios</td>
+              <td> <span>S/.</span> 0</td>
+              <td>2023-04-10</td>
+              <td>Completado</td>
+              <td> 
+                <span><a href="#"><img src="img/editar.png" th:src="@{/img/editar.png}" alt=""></a></span>
+                <span><a href="#"><img src="img/informacion.png" th:src="@{/img/informacion.png}" alt=""></a></span>
+              </td>              
+            </tr>
+  
+          
+            
+          </tbody>
+        </table>
+      </div> 
+
+      </div>
+</body>
+</html>

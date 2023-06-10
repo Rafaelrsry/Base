@@ -43,46 +43,80 @@ function ready(){
 }
 //Eliminamos todos los elementos del carrito y lo ocultamos
 function pagarClicked() {
-    // Obtener todos los elementos del carrito
-    var carritoItems = document.getElementsByClassName('carrito-item');
-    var cliId = document.getElementById("cli-sel").value
-    var precioTotalGeneral = 0;
-  
-    // Iterar sobre cada elemento del carrito
-    for (var i = 0; i < carritoItems.length; i++) {
-      var carritoItem = carritoItems[i];
-  
-      var titulo = carritoItem.getElementsByClassName('carrito-item-titulo')[0].innerText;
-      var precio = carritoItem.getElementsByClassName('carrito-item-precio')[0].innerText;
-      var cantidad = carritoItem.getElementsByClassName('carrito-item-cantidad')[0].value;
-      var spaned = carritoItem.getElementsByClassName('codigo')[0].innerText
-  
-      var precioPorcion = parseFloat(precio.replace('S/.', ''));
-      var descuento = calcularDescuento(parseInt(cantidad), precioPorcion);
-      var precioTotalItem = (precioPorcion * parseInt(cantidad)) - descuento;
-      precioTotalGeneral += precioTotalItem;
-      var code = spaned
+	  // Obtener todos los elementos del carrito
+	  var carritoItems = document.getElementsByClassName('carrito-item');
+	  var precioTotalGeneral = 0;
+	  var selectElement = document.getElementById('cli-sel');
+	  var valorSeleccionado = selectElement.value;
+	  var fechaActual = "2023-06-06";
+	  
+	  // Array para almacenar los pedidos
+	  var pedidos = [];
+	  
+	  // Iterar sobre cada elemento del carrito
+	  for (var i = 0; i < carritoItems.length; i++) {
+	    var carritoItem = carritoItems[i];
+	    
+	    var titulo = carritoItem.getElementsByClassName('carrito-item-titulo')[0].innerText;
+	    var precio = carritoItem.getElementsByClassName('carrito-item-precio')[0].innerText;
+	    var cantidad = carritoItem.getElementsByClassName('carrito-item-cantidad')[0].value;
+	    var spaned = carritoItem.getElementsByClassName('codigo')[0].innerText;
+	    var ides = carritoItem.getElementsByClassName('ides')[0].innerText;
+	    
+	    var precioPorcion = parseFloat(precio.replace('S/.', ''));
+	    var descuento = calcularDescuento(parseInt(cantidad), precioPorcion);
+	    var precioTotalItem = (precioPorcion * parseInt(cantidad)) - descuento;
+	    precioTotalGeneral += precioTotalItem;
+	    var code = spaned;
+	    
+	    // Crear un objeto con los datos del pedido actual
+	    var pedidoActual = {
+	    		idecliente: valorSeleccionado,
+	    		fecha: fechaActual,
+	    		idproducto: ides,
+	      cantidad: cantidad
+	    };
+	    
+	    // Agregar el pedido actual al array de pedidos
+	    pedidos.push(pedidoActual);
+	    
+	    console.log("ides:", ides);
+	    console.log("codigo:", code);
+	    console.log("Elemento:", titulo);
+	    console.log("Precio unitario:", precioPorcion);
+	    console.log("Cantidad:", parseInt(cantidad));
+	    console.log("Descuento:", descuento);
+	    console.log("Precio total con descuento:", 'S/.' + parseFloat(precioTotalItem.toFixed(2)));
+	  }
+	  
+	  console.log("Cliente id:", valorSeleccionado);
+	  console.log("Precio total general:", 'S/.' + precioTotalGeneral.toFixed(2));
+	  
+	  // Eliminar todos los elementos del carrito
+	  var carritoItemsContainer = document.getElementsByClassName('carrito-items')[0];
+	  while (carritoItemsContainer.hasChildNodes()) {
+	    carritoItemsContainer.removeChild(carritoItemsContainer.firstChild);
+	  }
+	  
+	  // Enviar los datos al backend de Spring utilizando AJAX
+	  $.ajax({
+	    url: '/ventas/register',
+	    type: 'POST',
+	    contentType: 'application/json',
+	    data: JSON.stringify(pedidos),
+	    success: function(response) {
+	      console.log("Pedidos creados exitosamente");
+	    },
+	    error: function(error) {
+	    	console.log(pedidos)
+	      console.error("Error al crear los pedidos");
+	    }
+	  });
+	  
+	  actualizarTotalCarrito();
+	  ocultarCarrito();
+	}
 
-      console.log("codigo:" , code)
-      console.log("Elemento:", titulo);
-      console.log("Precio unitario:", precioPorcion);
-      console.log("Cantidad:", parseInt(cantidad));
-      console.log("Descuento:", descuento);
-      console.log("Precio total con descuento:", 'S/.' + parseFloat(precioTotalItem.toFixed(2)));
-    }
-
-
-    console.log("Este es id cliente : " +cliId)
-    console.log("Precio total general:", 'S/.' + precioTotalGeneral.toFixed(2));
-  
-    // Elimino todos los elementos del carrito
-    var carritoItems = document.getElementsByClassName('carrito-items')[0];
-    while (carritoItems.hasChildNodes()) {
-      carritoItems.removeChild(carritoItems.firstChild)
-    }
-    actualizarTotalCarrito();
-    ocultarCarrito();
-  }
 
 //Funciòn que controla el boton clickeado de agregar al carrito
 function agregarAlCarritoClicked(event){
@@ -92,8 +126,9 @@ function agregarAlCarritoClicked(event){
     var precio = item.getElementsByClassName('precio-item')[0].innerText;
     var imagenSrc = item.getElementsByClassName('img-item')[0].src;
     var coded = item.getElementsByClassName('codigo')[0].innerText;
-
-    agregarItemAlCarrito(coded,titulo, precio, imagenSrc);
+    var ides = item.getElementsByClassName('ides')[0].innerText;
+    
+    agregarItemAlCarrito(ides,coded,titulo, precio, imagenSrc);
 
     hacerVisibleCarrito();
 }
@@ -110,7 +145,7 @@ function hacerVisibleCarrito(){
 }
 
 //Funciòn que agrega un item al carrito
-function agregarItemAlCarrito(codigo,titulo, precio, imagenSrc){
+function agregarItemAlCarrito(ides,codigo,titulo, precio, imagenSrc){
     
     var item = document.createElement('div');
     item.classList.add = ('item');
@@ -129,6 +164,7 @@ function agregarItemAlCarrito(codigo,titulo, precio, imagenSrc){
         <div class="carrito-item">
             <img src="${imagenSrc}" width="80px" alt="">
             <div class="carrito-item-detalles">
+            	<span class="ides">${ides}</span>
                 <span class="codigo">${codigo}</span>
                 <span class="carrito-item-titulo">${titulo}</span>
                 <div class="selector-cantidad">

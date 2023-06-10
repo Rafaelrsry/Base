@@ -2,9 +2,118 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" th:href="@{/css/css/sales.css}" >
+	  <script  th:src="@{/js/jquery/jquery-3.6.4.min.js}" type="text/javascript"> </script>
+	<script th:src="@{/js/scripts/app.js}" type="text/javascript"></script>
+	<script th:src="@{js/scripts/ventas.js}" type="text/javascript"></script>
+<title>Tienda de Pasteles |</title>
 </head>
 <body>
+	<header>
+		<h1>App Pasteleria</h1>
+	</header>
+	<div class="clientes">
+		<a href="/"> <span><img src="img/casa.png"
+				alt=""></span></a>
+		<h4>Una torta entera equivale 20 porciones</h4>
+		<h5>Escoge un cliente:</h5>
 
+
+		<span>Cliente: </span> 
+<select id="cli-sel" name="select">
+<option disabled selected>Escoge el cliente</option>
+  <option th:each="cliente : ${listacliente}" th:value="${cliente.id_clientes}" th:text="${cliente.cli_nombres + ' ' + cliente.cli_apellidos}"></option>
+</select>
+	</div>
+	<section class="contenedor">
+		<!-- Contenedor de elementos -->
+
+
+		<div class="contenedor-items">
+
+
+			<div th:each="producto :${listaproducto}" class="item">
+			
+			
+			  <span class="ides"  style="display: none;" th:text="${producto.id_producto}" ></span>
+				<span class="titulo-item" th:text="${producto.pdt_producto}"></span> 
+				<span class="codigo" th:text="${producto.codigo}"></span> 
+				<img th:src="${producto.pdt_foto}"	alt="" class="img-item">
+				<div class="soles">
+					<p>Precio S/.</p>
+					<span class="precio-item" th:text="${producto.pdt_precioporcion}"></span>
+				</div>
+
+				<div class="restantes">
+					<p>Porciones restantes:</p>
+					<span class="restante-item" th:text="${producto.pdt_porcion}"></span>
+				</div>
+
+				<button class="boton-item"
+				th:data-id_producto="${producto.id_producto}"
+	
+				>Agregar al Carrito</button>
+			</div>
+
+
+
+
+
+
+
+
+		</div>
+		<!-- Carrito de Compras -->
+		<div class="carrito" id="carrito">
+			<div class="header-carrito">
+				<h2>Tu Carrito</h2>
+			</div>
+
+			<div class="carrito-items"></div>
+			<div class="carrito-total">
+				<div class="anticipo">
+					<label> Anticipo S/.</label> <input type="number" name="" id="">
+				</div>
+
+				<div>
+			
+				
+					<p>
+						Precio S/D :<span id="precioSinDescuento"></span>
+					</p>
+					<p>
+						Descuento : <span id="descuentoTotal"></span>
+					</p>
+
+
+				</div>
+				<div class="fila">
+					<strong>Tu Total</strong> <span class="carrito-precio-total">
+
+					</span>
+				</div>
+		
+				
+				
+				
+             
+        
+        
+              
+            
+              	<button type="submit" class="btn-pagar">
+					Pagar <span> <img src="img/bolsa-de-la-compra.png" alt=""></span>
+				</button>
+           
+			
+			</div>
+		</div>
+	</section>
 </body>
 </html>

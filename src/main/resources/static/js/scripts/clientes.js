@@ -156,7 +156,7 @@ function ListarClientes(){
 						"<td>"+value.cli_distrito+"</td>"+
 						"<td>"+value.cli_telefono+"</td>"+
 						"<td>"+
-							"<button type='button' class='btn btn-success btnactualizarCliente'"+
+							"<button type='button' class='btn btn-light btnactualizarCliente'"+
 							"data-id_clientes='"+value.id_clientes+"'"+
 							"data-cli_nombres='"+value.cli_nombres+"'"+
 							"data-cli_apellidos='"+value.cli_apellidos+"'"+
@@ -164,13 +164,13 @@ function ListarClientes(){
 							"data-cli_direccion='"+value.cli_direccion+"'"+
 							"data-cli_distrito='"+value.cli_distrito+"'"+
 							"data-cli_cli_telefono='"+value.cli_telefono+"'"+
-							"><i class='fas fa-pen'></i></button></td>"+
+							"><img class='imgtabla' src='img/editar.png'  th:src='@{/img/editar.png}' alt=''></button></td>"+
 						"<td>"+
 							"<button type='button' class='btn btn-danger btneliminarCliente'"+	
 							" data-id_clientes='"+value.id_clientes+"'"+
 							" data-cli_nombres='"+value.cli_nombres+"'"+
 							" data-cli_apellidos='"+value.cli_apellidos+"'"+
-							"><i class='fas fa-trash'></i></button></td>"+							
+							"><img class='imgtabla' src='img/borrar.png'  th:src='@{/img/borrar.png}' alt=''></button></td>"+							
 						"</tr>")
 			})
 			

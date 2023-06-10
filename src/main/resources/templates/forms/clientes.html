@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<body>
+
+      <div th:fragment="clientes" id="clientes" class="contenidoclientes"  style="display: none;">
+          
+        <div class="mb-3">
+            <h1 class="text-center"> Clientes <span> <img src="img/clasificacion.png" th:src="@{/img/clasificacion.png}" alt=""></span></h1>
+          <button type="button" class="btn btn-primary" id="btnAgregarCliente">Agregar Cliente</button>
+        </div>
+
+        <div class="table-responsive vertscrol">
+          <table class="table  table-hover table-bordered" tabindex="-1" id="tableclientes">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Dni</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Distrito</th>
+                <th scope="col">Telefono</th>
+                <th scope="col" colspan="2">Opciones</th>
+              </tr>
+            </thead>
+  
+            <tbody>
+               <tr th:each="cliente :${listacliente}">
+                <td th:text="${cliente.id_clientes}"></td>
+                <td th:text="${cliente.cli_nombres}"></td>
+                <td th:text="${cliente.cli_apellidos}"></td>
+                <td th:text="${cliente.cli_dni}"></td>
+                <td th:text="${cliente.cli_direccion}"></td>
+                <td th:text="${cliente.cli_distrito}"></td>
+                <td th:text="${cliente.cli_telefono}"></td>
+               
+                <td> 
+                	<button type="button" class="btn btn-light btnactualizarCliente"
+						th:data-id_clientes="${cliente.id_clientes}"
+						th:data-cli_nombres="${cliente.cli_nombres}"
+						th:data-cli_apellidos="${cliente.cli_apellidos}"
+						th:data-cli_dni="${cliente.cli_dni}"
+						th:data-cli_direccion="${cliente.cli_direccion}"
+						th:data-cli_distrito="${cliente.cli_distrito}"
+						th:data-cli_cli_telefono="${cliente.cli_telefono}">
+						<img class="imgtabla"   th:src="@{/img/editar.png}" alt="">
+					</button>
+                </td>       
+                <td>
+                 <button type="button" class="btn btn-danger btneliminarCliente"
+						th:data-id_clientes="${cliente.id_clientes}"
+						th:data-cli_nombres="${cliente.cli_nombres}"
+						th:data-cli_apellidos="${cliente.cli_apellidos}"
+						>
+					
+						<img class="imgtabla"  th:src="@{/img/borrar.png}" alt="">
+					</button>
+                </td>       
+              </tr>
+
+
+            
+            </tbody>
+          </table>
+        </div>
+
+        
+
+      </div>
+
+</body>
+
+
+
+</html>

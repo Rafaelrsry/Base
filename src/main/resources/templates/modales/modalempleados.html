@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<body>
+    <div th:fragment="modalempleado" id="modale-emp" class="modale ocultar" >
+        <div class="modale-header">
+          
+            <h5> <div id="Tituloemp"></div>   <span id="close-emp">X</span></h5>
+        </div>
+                  <div class="modale-body">
+                      <form action="">
+                        
+                        <label for="">Ingresar Usuario :</label>
+                        <input type="text" name="" id="txtusuario">
+                        
+                        <label for="">Ingresar Contraseña :</label>
+                        <input type="text" name="" id="txtpassword">
+          
+                        <label for="">Ingresar Nombres:</label>
+                        <input type="text" name="" id="txtnombres">
+
+                        <label for="">Ingresar Apellidos:</label>
+                        <input type="text" name="" id="txtapellidos">
+          
+                        <label for="">Ingresar Ventas:</label>
+                        <input type="number" name="" id="txtventas" placeholder="0">
+          
+                        <label for="">Tipo de usuario:</label>
+                        <select name="" id="txttipo">
+                          <option value="1">Administrador</option>
+                          <option value="2">Empleado</option>
+                        </select>
+
+                        <label for=""> <br></label>
+          
+                        <input type="hidden" id="hddidusuario">
+                       <button class="btn btn-success btnmod" id="btnGuardarEmpleado" type="submit"> Enviar</button>
+                      </form>
+                  </div>
+                </div>
+                
+                
+                      <!-- Modal eliminar -->
+            <div th:fragment="eliminarempleado" id="modale-preguntaemp" class="modale ocultar" >
+        <div class="modale-header">
+          
+            <h5> <div id="Tituloemp">Eliminando Usuario</div>   <span id="close-preguemp">X</span></h5>
+        </div>
+        <div class="modale-body">
+        <div>
+        	<label id="mensajeeliminaremp"></label>
+					<input type="hidden" id="hddideliminarusuario" value="0">
+						<button type="button" class="btn btn-primary btneliminarus"
+						>Eliminar</button>
+        </div>
+        </div>
+      </div>
+      
+       <!-- Modal eliminar -->
+</body>
+</html>

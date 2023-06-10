@@ -1,5 +1,8 @@
 package pe.cibertec.proyecto.request;
 
+import lombok.Data;
+
+@Data
 public class UsuarioRequest {
 
 	

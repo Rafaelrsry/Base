@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+
+<body>
+
+
+
+      <div th:fragment="empleados" id="empleados"  style="display: none;">
+
+        
+        <div class="mb-3">
+          <h1 class="text-center"> Empleados <span> <img src="img/paquete.png" th:src="@{/img/headhunting.png}" alt=""></span></h1>
+
+        <button type="button" class="btn btn-primary" id="btnAgregarEmpleado">Agregar Empleado</button>
+
+      </div>
+
+      <div class="table-responsive vertscrol">
+        <table class="table  table-hover table-bordered"  id="tableempleados">
+          <thead>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Contraseña</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Ventas</th>
+              <th scope="col">Tipo</th>
+              
+              
+              <th scope="col" colspan="2">Opciones</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+               <tr th:each="usuario :${listausuario}">
+              <td th:text="${usuario.id_usuario}"></td>
+              <td th:text="${usuario.us_usuario}"></td>
+              <td th:text="${usuario.us_pass}"></td>
+              <td th:text="${usuario.us_nombres}"></td>
+               <td th:text="${usuario.us_apellidos}"></td>
+                <td th:text="${usuario.us_ventas}"></td>
+                 <td th:text="${usuario.us_tipo}"></td>
+                <td> 
+                	<button type="button" class="btn btn-light btnactualizarUsuario"
+						th:data-id_usuario="${usuario.id_usuario}"
+						th:data-us_usuario="${usuario.us_usuario}"
+						th:data-us_pass="${usuario.us_pass}"
+						th:data-us_nombres="${usuario.us_nombres}"
+						th:data-us_apellidos="${usuario.us_apellidos}"
+						th:data-us_ventas="${usuario.us_ventas}"
+						th:data-us_tipo="${usuario.us_tipo}">
+						<img class="imgtabla"   th:src="@{/img/editar.png}" alt="">
+					</button>
+                </td> 
+                
+                                <td>
+                 <button type="button" class="btn btn-danger btneliminarUsuario"
+						th:data-id_usuario="${usuario.id_usuario}"
+						th:data-us_nombres="${usuario.us_nombres}"
+						th:data-us_apellidos="${usuario.us_apellidos}"
+						>
+					
+						<img class="imgtabla"  th:src="@{/img/borrar.png}" alt="">
+					</button>
+                </td>             
+            </tr>
+  
+
+            
+          </tbody>
+        </table>
+      </div> 
+
+      </div>
+      
+</body>
+</html>

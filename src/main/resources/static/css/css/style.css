@@ -239,7 +239,7 @@ margin: auto;
 border-radius: 4px;
 background-color: white;
 width:500px;
-height:400px;
+height:460px;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 pointer-events: all;
 }
@@ -286,8 +286,42 @@ pointer-events: all;
   display: inline;
 }
 
+#Tituloemp {
+  display: inline;
+}
+
+#Tituloprod {
+	  display: inline;
+}
+
+.imgtabla{
+	width:15px
+}
+
 .vertscrol {
 	
 	 max-height: 300px; /* altura máxima del contenedor */
   overflow-y: auto; 
+}
+
+td span img {
+	width:90px;
+	height: 90px
+}
+
+
+#imgcon{
+		
+	  justify-content: center;
+  align-items: center;
+}
+#imagedefe {
+
+	width:60px;
+	height: 60px
+}
+
+#btnActualizarProducto {
+	margin-bottom: 10px;
+	
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <meta charset="UTF-8" />
+<body>
+
+      <div th:fragment="productos" id="productos"  style="display: none;">
+
+        
+        <div class="mb-3">
+          <h1 class="text-center"> Productos <span> <img src="img/paquete.png"  th:src="@{/img/paquete.png}" alt=""></span></h1>
+        <button type="button" class="btn btn-primary" id="btnAgregarProduco">Agregar Producto</button>
+      </div>
+
+      <div class="table-responsive vertscrol">
+        <table class="table  table-hover table-bordered" tabindex="-1" id="tableproductos">
+          <thead>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Foto</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Porcion</th>
+              <th scope="col">Torta Entera</th>
+              <th scope="col">Precio Porcion</th>
+              <th scope="col">Precio Completa</th>
+              <th scope="col">Codigo</th>
+              
+              <th scope="col" colspan="2">Opciones</th>
+            </tr>
+          </thead>
+  
+          <tbody id="productoelemento">
+               <tr th:each="producto :${listaproducto}">
+                <td th:text="${producto.id_producto}"></td>
+                <td><span><img class="btnactualizarFoto" th:src="${producto.pdt_foto}"
+                		th:data-id_producto="${producto.id_producto}"
+						th:data-pdt_foto="${producto.pdt_foto}"
+						th:data-pdt_producto="${producto.pdt_producto}"
+						th:data-pdt_porcion="${producto.pdt_porcion}"
+						th:data-pdt_tortacompleta="${producto.pdt_tortacompleta}"
+						th:data-pdt_precioporcion="${producto.pdt_precioporcion}"
+						th:data-pdt_preciocompleta="${producto.pdt_preciocompleta}"
+						th:data-codigo="${producto.codigo}"></span> </td>
+                <td th:text="${producto.pdt_producto}"></td>
+                <td th:text="${producto.pdt_porcion}"></td>
+                <td th:text="${producto.pdt_tortacompleta}"></td>
+                <td th:text="${producto.pdt_precioporcion}"></td>
+                <td th:text="${producto.pdt_preciocompleta}"></td>
+                <td th:text="${producto.codigo}"></td>
+       <td> 
+                	<button type="button" class="btn btn-light btnactualizarProducto"
+						th:data-id_producto="${producto.id_producto}"
+						th:data-pdt_foto="${producto.pdt_foto}"
+						th:data-pdt_producto="${producto.pdt_producto}"
+						th:data-pdt_porcion="${producto.pdt_porcion}"
+						th:data-pdt_tortacompleta="${producto.pdt_tortacompleta}"
+						th:data-pdt_precioporcion="${producto.pdt_precioporcion}"
+						th:data-pdt_preciocompleta="${producto.pdt_preciocompleta}"
+						th:data-codigo="${producto.codigo}">
+						<img class="imgtabla"   th:src="@{/img/editar.png}" alt="">
+					</button>
+                </td>       
+                <td>
+                 <button type="button" class="btn btn-danger btneliminarProducto"
+						th:data-id_producto="${producto.id_producto}"
+						th:data-pdt_producto="${producto.pdt_producto}"
+						
+						>
+					
+						<img class="imgtabla"  th:src="@{/img/borrar.png}" alt="">
+					</button>
+                </td>              
+            </tr>
+  
+      
+          
+          </tbody>
+        </table>
+      </div> 
+
+      </div>
+</body>
+</html>

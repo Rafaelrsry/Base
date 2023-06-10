@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 @Data
 @Entity
@@ -21,20 +23,17 @@ public class Ventas {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_ventas;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_clientes")
-	private Clientes clientes;
+
+	
+	@Column(name = "vnt_idclientes")
+	private Integer vnt_idclientes;
 	
 	@Column(name = "vnt_fecha")
-	private Date vnt_fecha;
+	private String vnt_fecha;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_producto")
-	private Productos productos;
+	@Column(name = "vnt_idproducto")
+	private Integer vnt_idproducto;
 	
 	@Column(name = "vnt_cantidad")
 	private Integer vnt_cantidad;
-	
-	
-	
 }
