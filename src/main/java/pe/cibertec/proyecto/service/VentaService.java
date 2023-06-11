@@ -17,6 +17,8 @@ public class VentaService {
 	
 	@Autowired
 	private VentaRepository ventaRepository;
+	
+	
 	public void registrarVenta(Ventas venta) {
 		ventaRepository.save(venta);
 	}
@@ -25,23 +27,6 @@ public class VentaService {
 		return ventaRepository.findAll();
 	}
 	
-	public void actProduct(
-	int idecliente,
-	String fecha,
-	int idproducto,
-	int cantidad
-	
-			) {
-		Ventas venta = new Ventas();
-	
-		venta.setVnt_idclientes(idecliente);
-		venta.setVnt_fecha(fecha);
-		venta.setVnt_idproducto(idproducto);
-		venta.setVnt_cantidad(cantidad);
-		
-		
-		
-		ventaRepository.save(venta);
-	}
+
 		
 }

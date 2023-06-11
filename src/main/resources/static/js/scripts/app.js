@@ -71,10 +71,11 @@ function pagarClicked() {
 	    
 	    // Crear un objeto con los datos del pedido actual
 	    var pedidoActual = {
-	    		idecliente: valorSeleccionado,
-	    		fecha: fechaActual,
-	    		idproducto: ides,
-	      cantidad: cantidad
+	    		id_ventas: 0,
+	    		vnt_idclientes: valorSeleccionado,
+	    		vnt_fecha: fechaActual,
+	    		vnt_idproducto: ides,
+	    		vnt_cantidad: cantidad
 	    };
 	    
 	    // Agregar el pedido actual al array de pedidos
@@ -100,11 +101,12 @@ function pagarClicked() {
 	  
 	  // Enviar los datos al backend de Spring utilizando AJAX
 	  $.ajax({
-	    url: '/ventas/register',
+	    url: '/appventas/registrarVenta',
 	    type: 'POST',
 	    contentType: 'application/json',
 	    data: JSON.stringify(pedidos),
 	    success: function(response) {
+	    	console.log(pedidos)
 	      console.log("Pedidos creados exitosamente");
 	    },
 	    error: function(error) {
@@ -116,6 +118,47 @@ function pagarClicked() {
 	  actualizarTotalCarrito();
 	  ocultarCarrito();
 	}
+
+
+
+/*
+var id = 0;
+var idcliente = 11
+var fecha = 2026
+var idproducto = 22
+var cantidad = 50/*
+$(document).on("click", ".btn-pagar", function(){
+	
+	$.ajax({
+		type: "POST",
+		url: "/appventas/registrarVenta",
+		contentType: "application/json",
+		data: JSON.stringify({
+			
+			id_ventas: id,
+			vnt_idclientes: idcliente,
+			vnt_fecha: fecha,
+			vnt_idproducto:idproducto, 
+			vnt_cantidad: cantidad,
+			
+			
+			
+		}),
+		success: function(resultado){
+			
+			console.log("Datos enviados:", JSON.parse(this.data)); // Mostrar los datos enviados en la consola
+			console.log("Respuesta del servidor:", resultado); // Mostrar la respuesta del servidor en la consola
+			alert(resultado.mensaje);
+			
+		}
+	});
+	
+
+})*/
+
+
+
+
 
 
 //Funciòn que controla el boton clickeado de agregar al carrito

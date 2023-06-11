@@ -9,6 +9,7 @@ import pe.cibertec.proyecto.model.db.Productos;
 import pe.cibertec.proyecto.service.ClienteService;
 import pe.cibertec.proyecto.service.ProductoService;
 import pe.cibertec.proyecto.service.UsuarioService;
+import pe.cibertec.proyecto.service.VentaService;
 
 @Controller
 public class HomeController {
@@ -33,7 +34,15 @@ public class HomeController {
 		
 		return "inicio";
 	}
+
+	@Autowired
+	private VentaService ventaService;
 	
+	@GetMapping("/ventas")
+	public String listadoProduco(Model model) {
+		model.addAttribute("listacliente", clienteService.listarClientes());
+		model.addAttribute("listaproducto", productoService.listarProductos());
+		return "ventas";
 	
-	
+	}
 }

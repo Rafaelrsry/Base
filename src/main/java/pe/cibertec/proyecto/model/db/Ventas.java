@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,17 +23,17 @@ public class Ventas {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_ventas;
-	
 
-	
-	@Column(name = "vnt_idclientes")
-	private Integer vnt_idclientes;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="vnt_idclientes")
+	private Clientes cliente;
 	
 	@Column(name = "vnt_fecha")
 	private String vnt_fecha;
 	
-	@Column(name = "vnt_idproducto")
-	private Integer vnt_idproducto;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="vnt_idproducto")
+	private Productos producto;
 	
 	@Column(name = "vnt_cantidad")
 	private Integer vnt_cantidad;

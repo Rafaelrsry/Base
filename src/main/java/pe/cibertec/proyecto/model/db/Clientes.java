@@ -41,5 +41,4 @@ public class Clientes {
 	private Integer cli_telefono;
 	
 
-	
 }

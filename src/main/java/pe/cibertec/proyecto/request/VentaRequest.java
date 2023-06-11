@@ -10,9 +10,9 @@ import pe.cibertec.proyecto.model.db.Productos;
 public class VentaRequest {
 
 	
-	private int id_ventas;
-	private int id_clientes;
-	private Date vnt_fecha;
-	private int id_producto;
+	private Integer id_ventas;
+	private Integer vnt_idclientes;
+	private String vnt_fecha;
+	private Integer vnt_idproducto;
 	private Integer vnt_cantidad;
 }
