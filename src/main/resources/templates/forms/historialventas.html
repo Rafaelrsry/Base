@@ -1,9 +1,66 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-
+<meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 </head>
 <body>
 
+      <div th:fragment="histovent" id="historialventas"  style="display: none;">
+
+        
+        <div class="mb-3">
+          <h1 class="text-center"> Historial de ventas <span> <img src="img/paquete.png" th:src="@{/img/paquete.png}" alt=""></span></h1>
+
+       
+
+      </div>
+
+      <div class="table-responsive vertscrol">
+        <table class="table  table-hover table-bordered vertscrol">
+          <thead>
+            <tr>
+              <th scope="col">IdVenta</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad Porciones</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Estado</th>
+              
+              
+              
+              <th scope="col" colspan="2">Opciones</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr th:each="encargos :${listaventas}">
+              <td th:text="${encargos.encargo.codigoencargo}"></td>
+               <td th:text="${encargos.producto.pdt_producto}"></td>
+              <td th:text="${encargos.cliente.cli_nombres+ ' '+encargos.cliente.cli_apellidos }"></td>
+             <td th:text="${encargos.encargo.enc_anticipo}"></td>
+              <td th:text="${encargos.vnt_fecha}"></td>
+              <td th:text="${encargos.encargo.estadopedido.estado}"></td>
+                  <td> 
+                	<button type="button" class="btn btn-light ">
+						<img class="imgtabla"   th:src="@{/img/editar.png}" alt="">
+					</button>
+                </td>    
+                
+                                <td>
+                 <button type="button" class="btn btn-danger ">
+					
+						<img class="imgtabla"  th:src="@{/img/borrar.png}" alt="">
+					</button>
+                </td>           
+            </tr>
+  
+          
+            
+          </tbody>
+        </table>
+      </div> 
+
+      </div>
 </body>
 </html>

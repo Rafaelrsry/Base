@@ -16,12 +16,13 @@
 
       </div>
 
-      <div class="table-responsive">
+      <div class="table-responsive vertscrol">
         <table class="table  table-hover table-bordered vertscrol">
           <thead>
             <tr>
               <th scope="col">IdEncargo</th>
               <th scope="col">Producto</th>
+               <th scope="col">Porciones</th>
               <th scope="col">Cliente</th>
               <th scope="col">Anticipo</th>
               <th scope="col">Fecha Creacion</th>
@@ -35,17 +36,26 @@
           </thead>
   
           <tbody>
-            <tr class="">
-              <th scope="row">1</th>
-              <td>Torta Chocolate</td>
-              <td>Rafael rios</td>
-              <td> <span>S/.</span> 0</td>
-              <td>2023-04-10</td>
-              <td>Completado</td>
-              <td> 
-                <span><a href="#"><img src="img/editar.png" th:src="@{/img/editar.png}" alt=""></a></span>
-                <span><a href="#"><img src="img/informacion.png" th:src="@{/img/informacion.png}" alt=""></a></span>
-              </td>              
+            <tr th:each="encargos :${listaventas}">
+              <td th:text="${encargos.encargo.codigoencargo}"></td>
+               <td th:text="${encargos.producto.pdt_producto}"></td>
+               <td th:text="${encargos.vnt_cantidad}"></td>
+              <td th:text="${encargos.cliente.cli_nombres+ ' '+encargos.cliente.cli_apellidos }"></td>
+             <td th:text="${encargos.encargo.enc_anticipo}"></td>
+              <td th:text="${encargos.vnt_fecha}"></td>
+              <td th:text="${encargos.encargo.estadopedido.estado}"></td>
+                  <td> 
+                	<button type="button" class="btn btn-light ">
+						<img class="imgtabla"   th:src="@{/img/editar.png}" alt="">
+					</button>
+                </td>    
+                
+                                <td>
+                 <button type="button" class="btn btn-danger ">
+					
+						<img class="imgtabla"  th:src="@{/img/borrar.png}" alt="">
+					</button>
+                </td>           
             </tr>
   
           

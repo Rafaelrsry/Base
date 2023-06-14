@@ -34,7 +34,9 @@ public class HomeController {
 	
 	@Autowired
 	private EstadoPedidoService estadopedidoService;
-	
+
+	@Autowired
+	private VentaService ventaService;
 	
 	@GetMapping({"/inicio","/","/home","/index"})
 	public String listadoTotal(Model model) {
@@ -42,12 +44,11 @@ public class HomeController {
 		model.addAttribute("listausuario", usuarioService.listarUsuario());
 		model.addAttribute("listaproducto", productoService.listarProductos());
 		model.addAttribute("listatipouser", tipousuarioService.listarUsuarios());
-		
+		model.addAttribute("listaventas", ventaService.listarVentas());
 		return "inicio";
 	}
 
-	@Autowired
-	private VentaService ventaService;
+	
 	
 	@GetMapping("/ventas")
 	public String listadoProduco(Model model) {

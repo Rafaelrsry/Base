@@ -39,7 +39,7 @@
               <a href="ventas"><span><img src="img/dinero.png" th:src="@{/img/paquete.png}" alt=""></span> Realizar Venta</a>
             </li>
             <li class="item">
-              <a href="#"><img src="img/tiempo.png" th:src="@{/img/tiempo.png}" alt=""></span> Historial Ventas</a>
+              <a href="#" onclick="OcultarHistorial()"><img src="img/tiempo.png" th:src="@{/img/tiempo.png}" alt=""></span> Historial Ventas</a>
             </li>
           </ul>
         </li>
@@ -85,6 +85,8 @@
 			<!-- Modal-->
 			<!--Terminan MODALES -->
 
+
+
 			<!-- Vista Cliente -->
 			<div th:insert="forms/clientes::clientes"></div>
 
@@ -99,7 +101,12 @@
 			<!-- Vista Encargos -->
 			<div th:insert="forms/encargos::encargos"></div>
 			
-
+			
+			<!-- Vista Historial -->
+			<div th:insert="forms/historialventas::histovent"></div>
+			
+			
+			
 
 		</div>
 	</main>

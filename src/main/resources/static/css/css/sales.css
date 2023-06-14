@@ -42,7 +42,7 @@ header h1{
 .contenedor .contenedor-items .item{
     max-width: 200px;
     margin: auto;
-    border: 1px solid #FFD9E0;
+    border: 3px solid #FFD9E0;
     border-radius: 10px;
     padding: 20px;
     transition: .3s;
@@ -71,13 +71,20 @@ header h1{
 .contenedor .contenedor-items .item .boton-item{
     display: block;
     margin: 10px auto;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     background-color: #FFD9E0;
-    text-shadow: grey 1px 1px;
-    color: #fff;
+   
+    color: black;
     padding: 5px 15px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.contenedor .contenedor-items .item .boton-item:hover{
+ background-color: grey;
+ color: white;
+ transition: background-color 0.5s ease;
+ 
 }
 /* seccion carrito */
 .carrito{

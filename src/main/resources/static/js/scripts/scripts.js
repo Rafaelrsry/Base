@@ -28,6 +28,38 @@ var x = document.getElementById("clientes");
 var xp = document.getElementById("productos");
 var xe = document.getElementById("empleados");
 var xenc = document.getElementById("encargos")
+var xhisto = document.getElementById("historialventas");
+
+function OcultarHistorial(){
+	  if (xhisto.style.display === "none") {
+		  xhisto.style.display = "block";
+	  } else {
+		  xhisto.style.display = "none";
+	  }
+	  
+	
+	
+	  if (x.style.display === "block") {
+		    x.style.display = "none";
+		} 
+	  
+	  if (xp.style.display === "block") {
+		    xp.style.display = "none";
+		} 
+
+		if (xe.style.display === "block") {
+		  xe.style.display = "none";
+		} 
+
+		if (xenc.style.display === "block") {
+		  xenc.style.display = "none";
+		} 
+	  
+		modalclientes.classList.add('ocultar')
+		modalproductos.classList.add('ocultar')
+		modalempleados.classList.add('ocultar')
+		fondo.classList.add('ocultar')
+}
 
 function OcultarClientes() {
   
@@ -49,6 +81,9 @@ if (xenc.style.display === "block") {
   xenc.style.display = "none";
 } 
 
+if (xhisto.style.display === "block") {
+	  xhisto.style.display = "none";
+	} 
 modalclientes.classList.add('ocultar')
 modalproductos.classList.add('ocultar')
 modalempleados.classList.add('ocultar')
@@ -57,6 +92,9 @@ fondo.classList.add('ocultar')
 
 function OcultarProductos() {
 
+	  if (xhisto.style.display === "block") {
+		  xhisto.style.display = "none";
+		} 
   if (xe.style.display === "block") {
     xe.style.display = "none";
   } 
@@ -88,6 +126,9 @@ function OcultarEmpleados() {
 
 } 
 
+  if (xhisto.style.display === "block") {
+	  xhisto.style.display = "none";
+	} 
 if (xenc.style.display === "block") {
   xenc.style.display = "none";
 } 
@@ -115,6 +156,9 @@ fondo.classList.add('ocultar')
 
 function OcultarEncargos() {
 
+	  if (xhisto.style.display === "block") {
+		  xhisto.style.display = "none";
+		} 
 
   if (xp.style.display === "block") {
     xp.style.display = "none";
