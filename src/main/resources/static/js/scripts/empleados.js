@@ -4,7 +4,7 @@ $(document).on("click", "#btnAgregarEmpleado", function(){
 	$("#txtpassword").val("");
 	$("#txtnombres").val("");
 	$("#txtapellidos").val("");
-	$("#txtventas").val("");
+	$("#txtventas").val("0");
 	$("#txttipo").val("");
 	$("#hddidusuario").val("0");
 	
@@ -51,7 +51,7 @@ $(document).on("click",".btneliminarUsuario",function(){
 	$("#hddideliminarusuario").val("");
 	$("#hddideliminarusuario").val($(this).attr("data-id_usuario"));
 	$("#mensajeeliminaremp").text("¿Está seguro de eliminar al usuario "+ 
-			$(this).attr("data-us_nombres")+" "+$(this).attr("data-us_apellidos")+"?");
+	$(this).attr("data-us_nombres")+" "+$(this).attr("data-us_apellidos")+"?");
 	
 	
 	 modalpreguntaemp.classList.remove('ocultar')
@@ -86,8 +86,8 @@ $(document).on("click", ".btneliminarus", function(){
 
 
 
-$(document).on("click", "#btnGuardarEmpleado", function(){
-	
+$(document).on("click", "#btnGuardarEmpleado", function(e){
+	e.preventDefault();
 	$.ajax({
 		type: "POST",
 		url: "/usuario/registrarUsuario",
@@ -135,7 +135,7 @@ function ListarEmpleados(){
 						"<td>"+value.us_nombres+"</td>"+
 						"<td>"+value.us_apellidos+"</td>"+
 						"<td>"+value.us_ventas+"</td>"+
-						"<td>"+value.us_tipo+"</td>"+
+						"<td>"+value.tipousuario.rolusuario+"</td>"+
 						"<td>"+
 							"<button type='button' class='btn btn-light btnactualizarUsuario'"+
 							"data-id_usuario='"+value.id_usuario+"'"+
@@ -143,8 +143,8 @@ function ListarEmpleados(){
 							"data-us_pass='"+value.us_pass+"'"+
 							"data-us_nombres='"+value.us_nombres+"'"+
 							"data-us_apellidos='"+value.us_apellidos+"'"+
-							"data-us_venta='"+value.us_ventas+"'"+
-							"data-us_tipo='"+value.us_tipo+"'"+
+							"data-us_ventas='"+value.us_ventas+"'"+
+							"data-us_tipo='"+value.tipousuario.idtipousuario+"'"+
 							"><img class='imgtabla' src='img/editar.png'  th:src='@{/img/editar.png}' alt=''></button></td>"+
 						"<td>"+
 							"<button type='button' class='btn btn-danger btneliminarUsuario'"+	

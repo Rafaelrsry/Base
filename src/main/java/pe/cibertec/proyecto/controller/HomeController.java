@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.cibertec.proyecto.model.db.Productos;
 import pe.cibertec.proyecto.service.ClienteService;
+import pe.cibertec.proyecto.service.EncargoService;
+import pe.cibertec.proyecto.service.EstadoPedidoService;
 import pe.cibertec.proyecto.service.ProductoService;
+import pe.cibertec.proyecto.service.TipoUsuarioService;
 import pe.cibertec.proyecto.service.UsuarioService;
 import pe.cibertec.proyecto.service.VentaService;
 
@@ -23,7 +26,14 @@ public class HomeController {
 
 	@Autowired
 	private ProductoService productoService;
+	@Autowired
+	private TipoUsuarioService tipousuarioService;
 	
+	@Autowired
+	private EncargoService encargoService;
+	
+	@Autowired
+	private EstadoPedidoService estadopedidoService;
 	
 	
 	@GetMapping({"/inicio","/","/home","/index"})
@@ -31,6 +41,7 @@ public class HomeController {
 		model.addAttribute("listacliente", clienteService.listarClientes());
 		model.addAttribute("listausuario", usuarioService.listarUsuario());
 		model.addAttribute("listaproducto", productoService.listarProductos());
+		model.addAttribute("listatipouser", tipousuarioService.listarUsuarios());
 		
 		return "inicio";
 	}
@@ -42,6 +53,7 @@ public class HomeController {
 	public String listadoProduco(Model model) {
 		model.addAttribute("listacliente", clienteService.listarClientes());
 		model.addAttribute("listaproducto", productoService.listarProductos());
+		model.addAttribute("listarestadopedido", estadopedidoService.listarEstadopedido());
 		return "ventas";
 	
 	}

@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pe.cibertec.proyecto.model.db.Clientes;
+import pe.cibertec.proyecto.model.db.Encargos;
 import pe.cibertec.proyecto.model.db.Productos;
 import pe.cibertec.proyecto.model.db.Ventas;
 import pe.cibertec.proyecto.request.ClienteRequest;
+import pe.cibertec.proyecto.request.EncargoRequest;
 import pe.cibertec.proyecto.request.ProductoRequest;
 import pe.cibertec.proyecto.request.VentaRequest;
 import pe.cibertec.proyecto.response.ResultadoResponse;
 import pe.cibertec.proyecto.service.ClienteService;
+import pe.cibertec.proyecto.service.EncargoService;
 import pe.cibertec.proyecto.service.ProductoService;
 import pe.cibertec.proyecto.service.VentaService;
 
@@ -37,7 +40,8 @@ public class VentasController {
 
 	@Autowired
 	private VentaService ventaService;
-	
+	@Autowired
+	private EncargoService encargoService;
 
 	
 	
@@ -48,7 +52,7 @@ public class VentasController {
 	}
 	
 	
-
+	
 	@PostMapping("/registrarVenta")
 	@ResponseBody
 	public ResultadoResponse registrarVenta(@RequestBody List<VentaRequest> ventaRequests) {
@@ -60,21 +64,31 @@ public class VentasController {
 	            Ventas objventas = new Ventas();
 	            Productos objprod = new Productos();
 	            Clientes objcliente= new Clientes();
+	            Encargos objencargo = new Encargos();
+	            
 	            if (ventaRequest.getId_ventas() == 0) {
 	                objventas.setId_ventas(ventaRequest.getId_ventas());
 	            }
 	            objcliente.setId_clientes(ventaRequest.getVnt_idclientes());
 	            
-	            //objventas.setVnt_idclientes(ventaRequest.getVnt_idclientes());
+	       
 	            objventas.setVnt_fecha(ventaRequest.getVnt_fecha());
 	            objprod.setId_producto(ventaRequest.getVnt_idproducto());
-	            //objventas.setVnt_idproducto(ventaRequest.getVnt_idproducto());
-	            
+	           objencargo.setCodigoencargo(ventaRequest.getVnt_codigoventa());
+	           
 	            objventas.setCliente(objcliente);
 	            objventas.setProducto(objprod);
+	            objventas.setEncargo(objencargo);
+	    
+	            objventas.setEncargo(objencargo);
 	            objventas.setVnt_cantidad(ventaRequest.getVnt_cantidad());
-
+	           
+	            
+	         
 	            ventaService.registrarVenta(objventas);
+	          
+	         
+	            
 	        }
 	    } catch (Exception ex) {
 	        mensaje = "No se realizaron modificaciones";
@@ -89,5 +103,8 @@ public class VentasController {
 
 	
 	
+	
+
+
 	
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import pe.cibertec.proyecto.model.db.TipoUsuario;
 import pe.cibertec.proyecto.model.db.Usuarios;
 import pe.cibertec.proyecto.request.ClienteRequest;
 import pe.cibertec.proyecto.request.UsuarioRequest;
@@ -43,6 +43,7 @@ public class UsuariosController {
 		try {			
 			//Se puede aplicar el patrón Builder en estos objetos
 			Usuarios objUsuario = new Usuarios();
+			TipoUsuario objtipous = new TipoUsuario();
 			
 			if(usuarioRequest.getId_usuario() > 0) {
 				objUsuario.setId_usuario(usuarioRequest.getId_usuario());
@@ -53,8 +54,9 @@ public class UsuariosController {
 			objUsuario.setUs_nombres(usuarioRequest.getUs_nombres());
 			objUsuario.setUs_apellidos(usuarioRequest.getUs_apellidos());
 			objUsuario.setUs_ventas(usuarioRequest.getUs_ventas());
-			objUsuario.setUs_tipo(usuarioRequest.getUs_tipo());
-			
+			objtipous.setIdtipousuario(usuarioRequest.getUs_tipo());
+			//objUsuario.setUs_tipo(usuarioRequest.getUs_tipo());
+			objUsuario.setTipousuario(objtipous);
 			usuarioService.registrarUsuario(objUsuario);
 			
 		}catch(Exception ex) {

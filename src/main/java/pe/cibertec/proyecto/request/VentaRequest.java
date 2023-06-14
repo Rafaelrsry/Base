@@ -15,4 +15,6 @@ public class VentaRequest {
 	private String vnt_fecha;
 	private Integer vnt_idproducto;
 	private Integer vnt_cantidad;
+	
+	private Integer vnt_codigoventa;
 }

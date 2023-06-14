@@ -44,7 +44,7 @@
               <td th:text="${usuario.us_nombres}"></td>
                <td th:text="${usuario.us_apellidos}"></td>
                 <td th:text="${usuario.us_ventas}"></td>
-                 <td th:text="${usuario.us_tipo}"></td>
+                 <td th:text="${usuario.tipousuario.rolusuario}"></td>
                 <td> 
                 	<button type="button" class="btn btn-light btnactualizarUsuario"
 						th:data-id_usuario="${usuario.id_usuario}"
@@ -53,7 +53,7 @@
 						th:data-us_nombres="${usuario.us_nombres}"
 						th:data-us_apellidos="${usuario.us_apellidos}"
 						th:data-us_ventas="${usuario.us_ventas}"
-						th:data-us_tipo="${usuario.us_tipo}">
+						th:data-us_tipo="${usuario.tipousuario.idtipousuario}">
 						<img class="imgtabla"   th:src="@{/img/editar.png}" alt="">
 					</button>
                 </td> 

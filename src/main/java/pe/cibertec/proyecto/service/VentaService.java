@@ -27,6 +27,7 @@ public class VentaService {
 		return ventaRepository.findAll();
 	}
 	
+	
 
 		
 }

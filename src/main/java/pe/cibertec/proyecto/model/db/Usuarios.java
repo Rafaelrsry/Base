@@ -2,9 +2,12 @@ package pe.cibertec.proyecto.model.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -33,8 +36,9 @@ public class Usuarios {
 	@Column(name = "us_ventas")
 	private Integer us_ventas;
 	
-	@Column(name = "us_tipo")
-	private Integer us_tipo;
-
+	
+	@ManyToOne
+	@JoinColumn(name ="us_tipo")
+	private  TipoUsuario tipousuario;
 	
 }

@@ -26,12 +26,11 @@
                         <input type="text" name="" id="txtapellidos">
           
                         <label for="">Ingresar Ventas:</label>
-                        <input type="number" name="" id="txtventas" placeholder="0">
+                        <input type="number" name="" id="txtventas" >
           
                         <label for="">Tipo de usuario:</label>
                         <select name="" id="txttipo">
-                          <option value="1">Administrador</option>
-                          <option value="2">Empleado</option>
+                           <option th:each="tipousuario : ${listatipouser}" th:value="${tipousuario.idtipousuario}" th:text="${tipousuario.rolusuario}"></option>
                         </select>
 
                         <label for=""> <br></label>

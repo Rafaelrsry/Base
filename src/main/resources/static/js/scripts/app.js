@@ -8,6 +8,12 @@ if(document.readyState == 'loading'){
     ready();
 }
 
+function generarCodigoVenta() {
+	  var codigo = Math.floor(Math.random() * 1000000).toString().padStart(6, "0");
+	  document.getElementById("codigoventa").textContent = codigo;
+	}
+
+
 function ready(){
     
     //Agregremos funcionalidad a los botones eliminar del carrito
@@ -48,8 +54,25 @@ function pagarClicked() {
 	  var precioTotalGeneral = 0;
 	  var selectElement = document.getElementById('cli-sel');
 	  var valorSeleccionado = selectElement.value;
-	  var fechaActual = "2023-06-06";
+	  var fechaActual = new Date();
+	  var anio = fechaActual.getFullYear();
+	  var mes = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
+	  var dia = ("0" + fechaActual.getDate()).slice(-2);
 	  
+	  var codigoventa =document.getElementById('codigoventa').innerText;
+	  
+	  
+	  var codevtn =document.getElementById('codigoventa').innerText;
+		 var pagoadelantado = document.getElementById('anticipo').value;
+		 var estadopedido = document.getElementById('list-estped').value;
+  
+	  
+	  
+	  var fechaFormateada = anio + "-" + mes + "-" + dia;
+	  var anticipo = document.getElementById('anticipo');
+	  var valanticipo = anticipo.value
+	  var estado = document.getElementById('list-estped');
+	  var estadopedido = estado.value;
 	  // Array para almacenar los pedidos
 	  var pedidos = [];
 	  
@@ -73,14 +96,16 @@ function pagarClicked() {
 	    var pedidoActual = {
 	    		id_ventas: 0,
 	    		vnt_idclientes: valorSeleccionado,
-	    		vnt_fecha: fechaActual,
+	    		vnt_fecha: fechaFormateada,
 	    		vnt_idproducto: ides,
-	    		vnt_cantidad: cantidad
+	    		vnt_cantidad: cantidad,
+	    		vnt_codigoventa: codevtn,
+	    		
 	    };
 	    
 	    // Agregar el pedido actual al array de pedidos
 	    pedidos.push(pedidoActual);
-	    
+	   
 	    console.log("ides:", ides);
 	    console.log("codigo:", code);
 	    console.log("Elemento:", titulo);
@@ -89,7 +114,8 @@ function pagarClicked() {
 	    console.log("Descuento:", descuento);
 	    console.log("Precio total con descuento:", 'S/.' + parseFloat(precioTotalItem.toFixed(2)));
 	  }
-	  
+	  console.log("antcipo",valanticipo);
+	  console.log("Estado pedido ",estadopedido)
 	  console.log("Cliente id:", valorSeleccionado);
 	  console.log("Precio total general:", 'S/.' + precioTotalGeneral.toFixed(2));
 	  
@@ -99,21 +125,48 @@ function pagarClicked() {
 	    carritoItemsContainer.removeChild(carritoItemsContainer.firstChild);
 	  }
 	  
+		$.ajax({
+			type: "POST",
+			url: "/encargos/registarEncargo",
+			contentType: "application/json",
+			data: JSON.stringify({
+				
+				codigoencargo: codevtn,
+				enc_anticipo: pagoadelantado,
+				enc_estado: estadopedido,
+				
+				
+				
+				
+			}),
+			success: function(resultado){
+				
+				  $.ajax({
+					    url: '/appventas/registrarVenta',
+					    type: 'POST',
+					    contentType: 'application/json',
+					    data: JSON.stringify(pedidos),
+					    success: function(response) {
+					    	console.log(pedidos)
+					      console.log("Pedidos creados exitosamente");
+					    },
+					    error: function(error) {
+					    	console.log(pedidos)
+					      console.error("Error al crear los pedidos");
+					    }
+					  });
+				
+				console.log("Datos enviados:", JSON.parse(this.data)); // Mostrar los datos enviados en la consola
+				console.log("Respuesta del servidor:", resultado); // Mostrar la respuesta del servidor en la consola
+				alert(resultado.mensaje);
+				
+			}
+		});
+	  
+	  
+	  
 	  // Enviar los datos al backend de Spring utilizando AJAX
-	  $.ajax({
-	    url: '/appventas/registrarVenta',
-	    type: 'POST',
-	    contentType: 'application/json',
-	    data: JSON.stringify(pedidos),
-	    success: function(response) {
-	    	console.log(pedidos)
-	      console.log("Pedidos creados exitosamente");
-	    },
-	    error: function(error) {
-	    	console.log(pedidos)
-	      console.error("Error al crear los pedidos");
-	    }
-	  });
+	
 	  
 	  actualizarTotalCarrito();
 	  ocultarCarrito();
@@ -333,4 +386,3 @@ function actualizarTotalCarrito() {
 
  
 
-  
