@@ -160,8 +160,8 @@ function pagarClicked() {
 												
 								}),
 								success: function(resultado){
-									alert(resultado.mensaje);
-									console.log(resultado);
+									carga()
+									
 								}
 							});
 					    	console.log(pedidos)
@@ -175,7 +175,7 @@ function pagarClicked() {
 				
 				console.log("Datos enviados:", JSON.parse(this.data)); // Mostrar los datos enviados en la consola
 				console.log("Respuesta del servidor:", resultado); // Mostrar la respuesta del servidor en la consola
-				alert(resultado.mensaje);
+				
 				
 			}
 		});
@@ -425,10 +425,59 @@ function actualizarTotalCarrito() {
 	});
   
   
+	function carga(){
+		var cake1 = document.getElementById('cake1');
+		var cake2 = document.getElementById('cake2');
+
+		// Esperar 1 segundo y luego hacer que la imagen 1 desaparezca y la imagen 2 aparezca
+		setTimeout(function() {
+		  cake1.classList.add('ocultar');
+		  cake2.classList.remove('ocultar');
+		}, 300);
+		
+		setTimeout(function() {
+			  cake1.classList.remove('ocultar');
+			  cake2.classList.add('ocultar');
+			}, 450);
+		
+		Preload()
+		
+	}
   
   
-  
+	function Preload() {
+		
+		var overlay = document.getElementById("overid");
+		var containeid = document.getElementById("containerid");
+	
+			overlay.classList.remove('ocultar');
+			containeid.classList.remove('ocultar');
+		
+			setTimeout(function() {
+				overlay.classList.add('ocultar');
+				containeid.classList.add('ocultar');
+				}, 400);
+		
+	}
+	
 document.addEventListener("DOMContentLoaded", function() {
+	
+
+	
+	$(document).on("click", "#btnProba", function(){
+		carga()
+		
+	})
+	
+
+	
+	
+	
+
+	
+	
+	
+	
 	
 	// Controlador de eventos para el select ".seleccion-cliente"
 	$(document).on("change", ".seleccion-cliente", function() {
@@ -550,6 +599,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	});
   
+
+
   
 
 

@@ -22,11 +22,27 @@
 </head>
 <body onload="generarCodigoVenta()" onpageshow="generarCodigoVenta()">
 <!--  Modal -->
+<div class="overlay ocultar" id="overid"></div>	
+
+<div class="containere ocultar" id="containerid">
+  <div class="cake">
+    <img id="cake1" class=""   th:src="@{/img/reload.png}" alt="">
+    <img id="cake2" class="ocultar" th:src="@{/img/checkreload.png}" alt="">
+    </div>
+  </div>
+</div>
+
+
+
+  
 
 	<div class="bck ocultar" id="fondonegro">
 			<span> <br></span>
 		</div>
 		
+		<div class="containertorta">
+  
+</div>
 		
 		
 		<div id="modal" class="modal ocultar">
@@ -93,11 +109,15 @@
 </div>
 
 	</div>
-	<section class="contenedor">
+	<section class="contenedor containertorta">
 		<!-- Contenedor de elementos -->
+		
+	
+		
+		<!--  -->
 
 
-		<div class="contenedor-items">
+		<div class="contenedor-items ">
 
 
 			<div th:each="producto :${listaproducto}" class="item">
