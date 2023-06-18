@@ -66,7 +66,7 @@ function pagarClicked() {
 		 var pagoadelantado = document.getElementById('anticipo').value;
 		 var estadopedido = document.getElementById('list-estped').value;
   
-	  
+	  var useractivo = 2;
 	  
 	  var fechaFormateada = anio + "-" + mes + "-" + dia;
 	  var anticipo = document.getElementById('anticipo');
@@ -91,7 +91,11 @@ function pagarClicked() {
 	    var precioTotalItem = (precioPorcion * parseInt(cantidad)) - descuento;
 	    precioTotalGeneral += precioTotalItem;
 	    var code = spaned;
-	    
+	    var pretotalproducto = precio * cantidad;
+	    if (cantidad % 20 === 0) {
+	    	  var descuento = pretotalproducto * 0.2;
+	    	  pretotalproducto -= descuento;
+	    	}
 	    // Crear un objeto con los datos del pedido actual
 	    var pedidoActual = {
 	    		id_ventas: 0,
@@ -100,12 +104,12 @@ function pagarClicked() {
 	    		vnt_idproducto: ides,
 	    		vnt_cantidad: cantidad,
 	    		vnt_codigoventa: codevtn,
-	    		
+	    		vnt_valorventa: pretotalproducto,
 	    };
 	    
 	    // Agregar el pedido actual al array de pedidos
 	    pedidos.push(pedidoActual);
-	   
+	    console.log("precio total por cada:", pretotalproducto);
 	    console.log("ides:", ides);
 	    console.log("codigo:", code);
 	    console.log("Elemento:", titulo);
@@ -147,6 +151,19 @@ function pagarClicked() {
 					    contentType: 'application/json',
 					    data: JSON.stringify(pedidos),
 					    success: function(response) {
+					    	
+					    	$.ajax({
+								type: "POST",
+								url: "/detalleventa/registarDetalleventa",
+								contentType: "application/json",
+								data: JSON.stringify({
+												
+								}),
+								success: function(resultado){
+									alert(resultado.mensaje);
+									console.log(resultado);
+								}
+							});
 					    	console.log(pedidos)
 					      console.log("Pedidos creados exitosamente");
 					    },
@@ -241,58 +258,77 @@ function hacerVisibleCarrito(){
 }
 
 //Funciòn que agrega un item al carrito
-function agregarItemAlCarrito(ides,codigo,titulo, precio, imagenSrc){
-    
-    var item = document.createElement('div');
-    item.classList.add = ('item');
-    var itemsCarrito = document.getElementsByClassName('carrito-items')[0];
+function agregarItemAlCarrito(ides, codigo, titulo, precio, imagenSrc) {
+	  var item = document.createElement('div');
+	  item.classList.add('item');
+	  var itemsCarrito = document.getElementsByClassName('carrito-items')[0];
 
-    //controlamos que el item que intenta ingresar no se encuentre en el carrito
-    var nombresItemsCarrito = itemsCarrito.getElementsByClassName('carrito-item-titulo');
-    for(var i=0;i < nombresItemsCarrito.length;i++){
-        if(nombresItemsCarrito[i].innerText==titulo){
-            alert("El item ya se encuentra en el carrito");
-            return;
-        }
-    }
+	  // Controlamos que el item que intenta ingresar no se encuentre en el carrito
+	  var nombresItemsCarrito = itemsCarrito.getElementsByClassName('carrito-item-titulo');
+	  for (var i = 0; i < nombresItemsCarrito.length; i++) {
+	    if (nombresItemsCarrito[i].innerText == titulo) {
+	      alert("El item ya se encuentra en el carrito");
+	      return;
+	    }
+	  }
 
-    var itemCarritoContenido = `
-        <div class="carrito-item">
-            <img src="${imagenSrc}" width="80px" alt="">
-            <div class="carrito-item-detalles">
-            	<span class="ides">${ides}</span>
-                <span class="codigo">${codigo}</span>
-                <span class="carrito-item-titulo">${titulo}</span>
-                <div class="selector-cantidad">
-                    <i class="fa-solid fa-minus restar-cantidad"></i>
-                    <input type="text" value="1" class="carrito-item-cantidad" disabled>
-                    <i class="fa-solid fa-plus sumar-cantidad"></i>
-                </div>
-                <span>S/.</span>
-                <span class="carrito-item-precio">${precio}</span>
-            </div>
-            <button class="btn-eliminar">
-                <i class="fa-solid fa-trash"></i>
-            </button>
-        </div>
-    `
-    item.innerHTML = itemCarritoContenido;
-    itemsCarrito.append(item);
+	  var itemCarritoContenido = `
+	    <div class="carrito-item">
+	        <img src="${imagenSrc}" width="80px" alt="">
+	        <div class="carrito-item-detalles">
+	            <span class="ides">${ides}</span>
+	            <span class="codigo">${codigo}</span>
+	            <span class="carrito-item-titulo">${titulo}</span>
+	            <div class="selector-cantidad">
+	                <i class="fa-solid fa-minus restar-cantidad"></i>
+	                <input type="text" value="1" class="carrito-item-cantidad" disabled>
+	                <i class="fa-solid fa-plus sumar-cantidad"></i>
+	                <i class="fa-solid fa-cake-candles"></i>
+	            </div>
+	            <span>S/.</span>
+	            <span class="carrito-item-precio">${precio}</span>
+	        </div>
+	        <button class="btn-eliminar">
+	            <i class="fa-solid fa-trash"></i>
+	        </button>
+	    </div>
+	  `;
 
-    //Agregamos la funcionalidad eliminar al nuevo item
-     item.getElementsByClassName('btn-eliminar')[0].addEventListener('click', eliminarItemCarrito);
+	  item.innerHTML = itemCarritoContenido;
+	  itemsCarrito.append(item);
 
-    //Agregmos al funcionalidad restar cantidad del nuevo item
-    var botonRestarCantidad = item.getElementsByClassName('restar-cantidad')[0];
-    botonRestarCantidad.addEventListener('click',restarCantidad);
+	  // Agregamos la funcionalidad eliminar al nuevo item
+	  item.getElementsByClassName('btn-eliminar')[0].addEventListener('click', eliminarItemCarrito);
 
-    //Agregamos la funcionalidad sumar cantidad del nuevo item
-    var botonSumarCantidad = item.getElementsByClassName('sumar-cantidad')[0];
-    botonSumarCantidad.addEventListener('click',sumarCantidad);
+	  // Agregamos la funcionalidad restar cantidad del nuevo item
+	  var botonRestarCantidad = item.getElementsByClassName('restar-cantidad')[0];
+	  botonRestarCantidad.addEventListener('click', restarCantidad);
 
-    //Actualizamos total
-    actualizarTotalCarrito();
-}
+	  // Agregamos la funcionalidad sumar cantidad del nuevo item
+	  var botonSumarCantidad = item.getElementsByClassName('sumar-cantidad')[0];
+	  botonSumarCantidad.addEventListener('click', sumarCantidad);
+
+	  // Incrementamos la cantidad en múltiplos de 20 al hacer clic en el ícono de las velas
+	  item.getElementsByClassName('fa-cake-candles')[0].addEventListener('click', function () {
+	    var inputCantidad = item.getElementsByClassName('carrito-item-cantidad')[0];
+	    var cantidad = parseInt(inputCantidad.value);
+	    var cantidadModulo20 = cantidad % 20;
+	    if (cantidadModulo20 !== 0) {
+	      cantidad += 20 - cantidadModulo20;
+	    } else {
+	      cantidad += 20;
+	    }
+	    inputCantidad.value = cantidad;
+	    actualizarTotalCarrito();
+	  });
+
+	  // Actualizamos el total del carrito
+	  actualizarTotalCarrito();
+	}
+
+
+
+
 //Aumento en uno la cantidad del elemento seleccionado
 function sumarCantidad(event){
     var buttonClicked = event.target;
@@ -384,5 +420,138 @@ function actualizarTotalCarrito() {
   }
   
 
- 
+  $(document).ready(function() {
+	    $('.seleccion-cliente').select2();
+	});
+  
+  
+  
+  
+  
+document.addEventListener("DOMContentLoaded", function() {
+	
+	// Controlador de eventos para el select ".seleccion-cliente"
+	$(document).on("change", ".seleccion-cliente", function() {
+	  var todo = document.getElementById("todo");
 
+	  // Verificar si se ha seleccionado un cliente
+	  if ($(this).val() !== '') {
+	    todo.classList.remove('ocultar'); // Mostrar la sección de preguntas
+	    todo.classList.remove('fadeIn')
+	     todo.classList.add('fadeUp')
+	  } else {
+	    todo.classList.add('ocultar'); // Ocultar la sección de preguntas
+	  }
+	  
+	  
+	});
+
+	
+	
+	var fondito = document.getElementById("fondonegro");
+	var modal = document.getElementById("modal");
+	var todo = document.getElementById("todo");
+	
+	  
+	
+	 $(document).on("click", ".btncancelado", function() {
+		 todo.classList.remove('fadeUp')
+		 todo.classList.add('fadeIn')
+		 setTimeout(function() {
+			  todo.classList.add('ocultar');
+			}, 800);	  
+			  });
+	
+	  $(document).on("click", ".close", function() {
+		  
+		  
+		  modal.classList.add('ocultar')
+			 fondito.classList.add('ocultar')
+				  
+			  });
+
+	$(document).ready(function() {
+	  var idClientes, nombre; // Variables para almacenar los valores seleccionados
+
+	  // Asignar el evento change al select
+	  $(".seleccion-cliente").change(function() {
+	    idClientes = $(this).find("option:selected").data("id_clientes");
+	    nombre = $(this).find("option:selected").data("cli_nombres");
+	    apellido = $(this).find("option:selected").data("cli_apellidos");
+	    dni = $(this).find("option:selected").data("cli_dni");
+	    direccion = $(this).find("option:selected").data("cli_direccion");
+	    distrito = $(this).find("option:selected").data("cli_distrito");
+	    telefono = $(this).find("option:selected").data("cli_telefono");
+	  });
+
+	  // Controlador de eventos para el botón ".btncancelado"
+	  $(document).on("click", ".btncancelado", function() {
+ 
+		  
+	  });
+
+	  // Controlador de eventos para el botón ".btncorrecto"
+	  $(document).on("click", ".btncorrecto", function() {
+		 
+		  
+		
+		  
+		  modal.classList.remove('ocultar')
+		 fondito.classList.remove('ocultar')
+		 
+		   $("#txtNombreCliente").val(nombre);
+		  $("#txtApellidoCliente").val(apellido);
+		  $("#txtDniCliente").val(dni);
+		  $("#txtDireccionCliente").val(direccion);
+			$("#txtDistritoCliente").val(distrito);
+			$("#txtTelefonoCliente").val(telefono);
+			$("#hddidcliente").val(idClientes);
+		  
+			
+	  });
+	});
+	
+	
+	
+	$(document).on("click", "#btnGuardarClientemod", function(){
+		
+		$.ajax({
+			type: "POST",
+			url: "/cliente/actualizarcliente",
+			contentType: "application/json",
+			data: JSON.stringify({
+				
+				id_clientes: $("#hddidcliente").val(),
+				cli_nombres:$("#txtNombreCliente").val(),
+				cli_apellidos:$("#txtApellidoCliente").val(),
+				cli_dni:$("#txtDniCliente").val(),
+				cli_direccion: $("#txtDireccionCliente").val(),
+				cli_distrito: $("#txtDistritoCliente").val(),
+				cli_telefono: $("#txtTelefonoCliente").val(),
+				
+				
+				
+			}),
+			success: function(resultado){
+				console.log("Datos enviados:", JSON.parse(this.data)); // Mostrar los datos enviados en la consola
+				console.log("Respuesta del servidor:", resultado); // Mostrar la respuesta del servidor en la consola
+				alert(resultado.mensaje);
+				
+			}
+		});
+		
+		
+		  modal.classList.add('ocultar')
+			 fondito.classList.add('ocultar')
+	})
+	
+	
+	
+	
+	});
+  
+  
+
+
+  
+  

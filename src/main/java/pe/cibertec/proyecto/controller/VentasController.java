@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +45,7 @@ public class VentasController {
 	private EncargoService encargoService;
 
 	
+
 	
 	@GetMapping("/listarVentas")
 	@ResponseBody
@@ -51,6 +53,12 @@ public class VentasController {
 		return ventaService.listarVentas();
 	}
 	
+
+	@GetMapping("/listarbusqueda")
+	@ResponseBody
+	public List<Ventas> listarnom(@RequestParam("busqueda") String busqueda){
+		return ventaService.busqueda(busqueda);
+	}
 	
 	
 	@PostMapping("/registrarVenta")
@@ -75,7 +83,7 @@ public class VentasController {
 	            objventas.setVnt_fecha(ventaRequest.getVnt_fecha());
 	            objprod.setId_producto(ventaRequest.getVnt_idproducto());
 	           objencargo.setCodigoencargo(ventaRequest.getVnt_codigoventa());
-	           
+	           objventas.setVnt_valorventa(ventaRequest.getVnt_valorventa());
 	            objventas.setCliente(objcliente);
 	            objventas.setProducto(objprod);
 	            objventas.setEncargo(objencargo);
@@ -101,6 +109,26 @@ public class VentasController {
 	            .build();
 	}
 
+	
+	
+	
+	@DeleteMapping("/eliminarVenta")
+	@ResponseBody
+	public ResultadoResponse eliminarVenta(
+			@RequestBody VentaRequest ventaRequest) {
+		String mensaje = "Encargo Eliminado Correctamente";
+		Boolean respuesta = true;
+		try {
+			ventaService.eliminarVenta(ventaRequest.getId_ventas());
+		}catch (Exception e) {
+			mensaje = "Encargo no eliminado";
+			respuesta = false;
+		}
+		return ResultadoResponse.builder()
+				.mensaje(mensaje)
+				.respuesta(respuesta)
+				.build();
+	}
 	
 	
 	

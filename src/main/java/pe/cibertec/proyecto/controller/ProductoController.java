@@ -42,6 +42,8 @@ public class ProductoController {
 		return productoService.listarProductos();
 	}
 
+
+
 	
 	@PostMapping("/upload")
 	@ResponseBody
@@ -107,6 +109,11 @@ public class ProductoController {
 	}
 	
 	
+	@GetMapping("/listarpornombre")
+	@ResponseBody
+	public List<Productos> listarnom(@RequestParam("nombre") String nombre){
+		return productoService.buscarnom(nombre);
+	}
 	
 	
 	

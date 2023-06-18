@@ -36,6 +36,43 @@ public class EncargosController {
 		return encargoService.listarEncargo();
 }
 	
+	
+	@PostMapping("/actualizar")
+	@ResponseBody
+	public ResultadoResponse actualizarEncargo(
+			@RequestBody EncargoRequest encargoRequest
+			) {
+		String mensaje ="Actualizado Exitoso";
+		Boolean respuesta = true;
+		try {			
+			//Se puede aplicar el patrón Builder en estos objetos
+			Encargos objEncargo = new Encargos();
+			
+			EstadoPedido objEstadoPedido = new EstadoPedido();
+			
+			objEncargo.setCodigoencargo(encargoRequest.getCodigoencargo());
+		
+		
+		objEstadoPedido.setIdestado(encargoRequest.getEnc_estado());
+		
+		objEncargo.setEstadopedido(objEstadoPedido);
+		encargoService.registrarEncargos(objEncargo);
+			
+		}catch(Exception ex) {
+			mensaje = "No se realizaron actualizaciones";
+			respuesta = false;
+		}
+		return ResultadoResponse.builder()
+				.mensaje(mensaje)
+				.respuesta(respuesta)
+				.build();
+	}
+	
+	
+	
+	
+	
+	
 	@PostMapping("/registarEncargo")
 	@ResponseBody
 	public ResultadoResponse registrarEncargo(

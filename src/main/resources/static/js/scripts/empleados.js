@@ -1,5 +1,5 @@
 $(document).on("click", "#btnAgregarEmpleado", function(){
-	
+	editCSSdos()
 	$("#txtusuario").val("");
 	$("#txtpassword").val("");
 	$("#txtnombres").val("");
@@ -48,6 +48,7 @@ $(document).on("click", ".btnactualizarUsuario", function(){
 
 
 $(document).on("click",".btneliminarUsuario",function(){
+	editCSS()
 	$("#hddideliminarusuario").val("");
 	$("#hddideliminarusuario").val($(this).attr("data-id_usuario"));
 	$("#mensajeeliminaremp").text("¿Está seguro de eliminar al usuario "+ 
@@ -160,3 +161,46 @@ function ListarEmpleados(){
 	})
 }
 
+$(document).on("click", ".btnbusquedaEmp", function(e){
+	e.preventDefault();
+	
+	var busqueda = $('#palabraclaveEmp').val();
+	$.ajax({
+		type: "GET",
+		url: "/usuario/listarbusqueda",
+		data: { busqueda: busqueda },
+		success: function(resultado){
+			//console.log(resultado);
+			$("#tableempleados > tbody").html("");
+			$.each(resultado, function(index, value){
+				$("#tableempleados > tbody").append("<tr>"+
+						"<td>"+value.id_usuario+"</td>"+
+						"<td>"+value.us_usuario+"</td>"+
+						"<td>"+value.us_pass+"</td>"+
+						"<td>"+value.us_nombres+"</td>"+
+						"<td>"+value.us_apellidos+"</td>"+
+						"<td>"+value.us_ventas+"</td>"+
+						"<td>"+value.tipousuario.rolusuario+"</td>"+
+						"<td>"+
+							"<button type='button' class='btn btn-light btnactualizarUsuario'"+
+							"data-id_usuario='"+value.id_usuario+"'"+
+							"data-us_usuario='"+value.us_usuario+"'"+
+							"data-us_pass='"+value.us_pass+"'"+
+							"data-us_nombres='"+value.us_nombres+"'"+
+							"data-us_apellidos='"+value.us_apellidos+"'"+
+							"data-us_ventas='"+value.us_ventas+"'"+
+							"data-us_tipo='"+value.tipousuario.idtipousuario+"'"+
+							"><img class='imgtabla' src='img/editar.png'  th:src='@{/img/editar.png}' alt=''></button></td>"+
+						"<td>"+
+							"<button type='button' class='btn btn-danger btneliminarUsuario'"+	
+							" data-id_usuario='"+value.id_usuario+"'"+
+							" data-us_nombres='"+value.us_nombres+"'"+
+							" data-us_apellidos='"+value.us_apellidos+"'"+
+							"><img class='imgtabla' src='img/borrar.png'  th:src='@{/img/borrar.png}' alt=''></button></td>"+							
+						"</tr>")
+			})
+			
+			
+		}
+	})
+})

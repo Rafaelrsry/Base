@@ -116,4 +116,15 @@ public void ActualizarPorcion(int id_producto,
 	producto.setPdt_porcion(pdt_porcion);
 	productoRepository.save(producto);
 }
+
+
+public List<Productos> buscarnom(String nombre){
+	if(nombre!=null) {
+		return productoRepository.buscarPorNombre(nombre);
+	}
+	
+	return productoRepository.findAll();
+}
+	
+
 }

@@ -1,5 +1,5 @@
 $(document).on("click", "#btnAgregarProduco", function(){
-	
+	editCSSdos()
 	$("#arch").val("");
 	$("#imagedefe").val("");
 	
@@ -290,6 +290,7 @@ function ListarProductos(){
 
 
 $(document).on("click",".btneliminarProducto",function(){
+	editCSS()
 	$("#hddideliminarproducto").val("");
 	$("#hddideliminarproducto").val($(this).attr("data-id_producto"));
 	$("#mensajeeliminarprodu").text("¿Está seguro de eliminar al producto "+ 
@@ -327,55 +328,60 @@ $(document).on("click", ".btneliminarpro", function(){
 });
 
 
-/*
-
-$(document).on("click", "#btnGuardarProducto", function(){
-    var inputFileImage = document.getElementById("arch");
-    var file = inputFileImage.files[0];
-    var data = new FormData();
-    data.append("producto",file);
-
-    $.ajax({
-        url: "/producto/upload",
-        type: "post",
-        data: data,
-        cache: false,
-        contentType: false,
-        processData: false
-    }).done(function(res){
-        var pdt_producto = $("#txtproducto").val();
-        var pdt_porcion = $("#txtporciones").val();
-        var pdt_tortacompleta = $("#txtentera").val();
-        var pdt_precioporcion = $("#txtprecioporcion").val();
-        var pdt_preciocompleta = $("#txtprecioentera").val();
-        var codigo = $("#txtcodigo").val();
-        var ruta = res;
-        $.ajax({
-           url: "/producto/register",s
-           type: "post",
-           data: {
-        	   "pdt_foto":res,
-        	   "pdt_producto":pdt_producto,
-        	   "pdt_porcion":pdt_porcion,
-        	   "pdt_tortacompleta":pdt_tortacompleta,
-        	   "pdt_precioporcion":pdt_precioporcion,
-        	   "pdt_preciocompleta":pdt_preciocompleta,
-        	   "codigo":codigo
-           }
-        }).done(function(data){
-            location.href = data;
-        });
-    });
-});
-
-
-
-/*
-
-
-
-
-*/
+$(document).on("click", ".btnbusqueda", function(e){
+	e.preventDefault();
+	var nombre = $('#palabraclave').val();
+	
+	$.ajax({
+		type: "GET",
+		url: "/producto/listarpornombre",
+		 data: { nombre: nombre },
+		success: function(resultado){
+			//console.log(resultado);
+			$("#tableproductos > tbody").html("");
+			$.each(resultado, function(index, value){
+				$("#tableproductos > tbody").append("<tr>"+
+						"<td>"+value.id_producto+"</td>"+
+						"<td>"+"<span>"+"<img class='btnactualizarFoto'"+
+						"data-id_producto='"+value.id_producto+"'"+
+						"data-pdt_foto='"+value.pdt_foto+"'"+
+						"data-pdt_producto='"+value.pdt_producto+"'"+
+						"data-pdt_porcion='"+value.pdt_porcion+"'"+
+						"data-pdt_tortacompleta='"+value.pdt_tortacompleta+"'"+
+						"data-pdt_precioporcion='"+value.pdt_precioporcion+"'"+
+						"data-pdt_preciocompleta='"+value.pdt_preciocompleta+"'"+
+						"data-codigo='"+value.codigo+"' src='"+value.pdt_foto+"' alt=''>"+"<span>"+"</td>"+
+						"<td>"+value.pdt_producto+"</td>"+
+						"<td>"+value.pdt_porcion+"</td>"+
+						"<td>"+value.pdt_tortacompleta+"</td>"+
+						"<td>"+value.pdt_precioporcion+"</td>"+
+						"<td>"+value.pdt_preciocompleta+"</td>"+
+						"<td>"+value.codigo+"</td>"+
+						"<td>"+
+							"<button type='button' class='btn btn-light btnactualizarProducto'"+
+							"data-id_producto='"+value.id_producto+"'"+
+							"data-pdt_foto='"+value.pdt_foto+"'"+
+							"data-pdt_producto='"+value.pdt_producto+"'"+
+							"data-pdt_porcion='"+value.pdt_porcion+"'"+
+							"data-pdt_tortacompleta='"+value.pdt_tortacompleta+"'"+
+							"data-pdt_precioporcion='"+value.pdt_precioporcion+"'"+
+							"data-pdt_preciocompleta='"+value.pdt_preciocompleta+"'"+
+							"data-codigo='"+value.codigo+"'"+
+							"><img class='imgtabla' src='img/editar.png'  th:src='@{/img/editar.png}' alt=''></button></td>"+
+						"<td>"+
+							"<button type='button' class='btn btn-danger btneliminarProducto'"+	
+							"data-id_producto='"+value.id_producto+"'"+
+							"data-pdt_producto='"+value.pdt_producto+"'"+
+							
+							"><img class='imgtabla' src='img/borrar.png'  th:src='@{/img/borrar.png}' alt=''></button></td>"+							
+						"</tr>")
+			})
+			
+			
+		}
+	})
+	
+})
 
 
 

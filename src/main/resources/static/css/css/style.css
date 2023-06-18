@@ -281,18 +281,11 @@ pointer-events: all;
   width: 100%;
   height: 100%;
 }
-
-#Titulo {
-  display: inline;
+#TituloEnc,#Titulo,#Tituloemp,#Tituloprod{
+	display: inline;
 }
 
-#Tituloemp {
-  display: inline;
-}
 
-#Tituloprod {
-	  display: inline;
-}
 
 .imgtabla{
 	width:15px

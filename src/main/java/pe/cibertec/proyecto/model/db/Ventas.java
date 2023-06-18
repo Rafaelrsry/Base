@@ -50,6 +50,8 @@ public class Ventas implements Serializable{
 	private Encargos encargo;
 	
 
+	@Column(name = "vnt_valorventa")
+	private double vnt_valorventa;
 	
 	
 

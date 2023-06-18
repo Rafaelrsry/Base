@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import pe.cibertec.proyecto.model.db.Clientes;
+import pe.cibertec.proyecto.model.db.Productos;
 import pe.cibertec.proyecto.request.ClienteRequest;
 import pe.cibertec.proyecto.service.ClienteService;
 
@@ -69,6 +70,46 @@ public class ClientesController {
 				.mensaje(mensaje)
 				.respuesta(respuesta)
 				.build();
+	}
+	
+	
+	
+	@PostMapping("/actualizarcliente")
+	@ResponseBody
+	public ResultadoResponse actualizarcliente(
+			@RequestBody ClienteRequest clienteRequest
+			) {
+		String mensaje ="Envio Exitoso";
+		Boolean respuesta = true;
+		try {			
+			//Se puede aplicar el patrón Builder en estos objetos
+			Clientes objCliente = new Clientes();
+			objCliente.setCli_nombres(clienteRequest.getCli_nombres());
+			objCliente.setCli_apellidos(clienteRequest.getCli_apellidos());
+			objCliente.setCli_dni(clienteRequest.getCli_dni());
+			
+			objCliente.setId_clientes(clienteRequest.getId_clientes());
+			objCliente.setCli_direccion(clienteRequest.getCli_direccion());
+			objCliente.setCli_distrito(clienteRequest.getCli_distrito());
+			objCliente.setCli_telefono(clienteRequest.getCli_telefono());
+			
+			clienteService.registrarCliente(objCliente);
+			
+			
+		}catch(Exception ex) {
+			mensaje = "No se realizaron modificaciones";
+			respuesta = false;
+		}
+		return ResultadoResponse.builder()
+				.mensaje(mensaje)
+				.respuesta(respuesta)
+				.build();
+	}
+	
+	@GetMapping("/listarbusqueda")
+	@ResponseBody
+	public List<Clientes> listarnom(@RequestParam("busqueda") String busqueda){
+		return clienteService.busqueda(busqueda);
 	}
 	
 	

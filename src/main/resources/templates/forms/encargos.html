@@ -10,14 +10,16 @@
 
         
         <div class="mb-3">
-          <h1 class="text-center"> Encargos <span> <img src="img/paquete.png" th:src="@{/img/paquete.png}" alt=""></span></h1>
+          <h1 class="text-center "> Encargos <span> <img src="img/paquete.png" th:src="@{/img/paquete.png}" alt=""></span></h1>
 
-       
-
+                      <form class="d-flex flex-row">
+      <input class="form-control mr-sm-2" type="search" placeholder="Busca por id,cliente o estado" id="palabraclaveEnc" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0 btnbusquedaEnc" type="submit">Buscar</button>
+    </form>
       </div>
 
       <div class="table-responsive vertscrol">
-        <table class="table  table-hover table-bordered vertscrol">
+        <table class="table  table-hover table-bordered vertscrol" id="tableencargos">
           <thead>
             <tr>
               <th scope="col">IdEncargo</th>
@@ -31,36 +33,38 @@
               
               
               
-              <th scope="col" colspan="2">Opciones</th>
+              <th scope="col" colspan="1">Opciones</th>
             </tr>
           </thead>
   
           <tbody>
-            <tr th:each="encargos :${listaventas}">
-              <td th:text="${encargos.encargo.codigoencargo}"></td>
-               <td th:text="${encargos.producto.pdt_producto}"></td>
-               <td th:text="${encargos.vnt_cantidad}"></td>
-              <td th:text="${encargos.cliente.cli_nombres+ ' '+encargos.cliente.cli_apellidos }"></td>
-             <td th:text="${encargos.encargo.enc_anticipo}"></td>
-              <td th:text="${encargos.vnt_fecha}"></td>
-              <td th:text="${encargos.encargo.estadopedido.estado}"></td>
-                  <td> 
-                	<button type="button" class="btn btn-light ">
-						<img class="imgtabla"   th:src="@{/img/editar.png}" alt="">
-					</button>
-                </td>    
-                
-                                <td>
-                 <button type="button" class="btn btn-danger ">
-					
-						<img class="imgtabla"  th:src="@{/img/borrar.png}" alt="">
-					</button>
-                </td>           
-            </tr>
-  
-          
-            
-          </tbody>
+  <tr th:each="encargos : ${listaventas}">
+    <td th:text="${encargos.encargo.codigoencargo}"></td>
+    <td th:text="${encargos.producto.pdt_producto}"></td>
+    <td th:text="${encargos.vnt_cantidad}"></td>
+    <td th:text="${encargos.cliente.cli_nombres + ' ' + encargos.cliente.cli_apellidos }"></td>
+    <td th:text="${encargos.encargo.enc_anticipo}"></td>
+    <td th:text="${encargos.vnt_fecha}"></td>
+    <td>
+      <img class="btncompletado" th:if="${encargos.encargo.estadopedido.estado eq 'COMPLETADO'}" th:src="@{/img/COMPLETADO.png}" alt=""
+        th:data-codigoencargo="${encargos.encargo.codigoencargo}"
+        th:data-estado="${encargos.encargo.estadopedido.idestado}">
+      <img class="btnnocompletado" th:if="${encargos.encargo.estadopedido.estado eq 'NO COMPLETADO'}" th:src="@{/img/nocompletado.png}" alt=""
+        th:data-codigoencargo="${encargos.encargo.codigoencargo}"
+        th:data-estado="${encargos.encargo.estadopedido.idestado}">
+    </td>
+    <td>
+      <button type="button" class="btn btn-danger btneliminarEnc"
+      th:data-id_ventas="${encargos.id_ventas}" 
+      th:data-codigoencargo="${encargos.encargo.codigoencargo}" 
+      th:data-producto="${encargos.producto.pdt_producto}" 
+      >
+        <img class="imgtabla" th:src="@{/img/borrar.png}" alt="">
+      </button>
+    </td>
+  </tr>
+</tbody>
+
         </table>
       </div> 
 

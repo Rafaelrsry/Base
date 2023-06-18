@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.cibertec.proyecto.model.db.Productos;
+import pe.cibertec.proyecto.repository.EncargoRepository;
 import pe.cibertec.proyecto.service.ClienteService;
+import pe.cibertec.proyecto.service.DetalleVentaService;
 import pe.cibertec.proyecto.service.EncargoService;
 import pe.cibertec.proyecto.service.EstadoPedidoService;
 import pe.cibertec.proyecto.service.ProductoService;
@@ -38,6 +40,10 @@ public class HomeController {
 	@Autowired
 	private VentaService ventaService;
 	
+	@Autowired
+	private DetalleVentaService detalleventaService;
+	
+	
 	@GetMapping({"/inicio","/","/home","/index"})
 	public String listadoTotal(Model model) {
 		model.addAttribute("listacliente", clienteService.listarClientes());
@@ -45,6 +51,7 @@ public class HomeController {
 		model.addAttribute("listaproducto", productoService.listarProductos());
 		model.addAttribute("listatipouser", tipousuarioService.listarUsuarios());
 		model.addAttribute("listaventas", ventaService.listarVentas());
+		model.addAttribute("listadet", detalleventaService.listarDetalles());
 		return "inicio";
 	}
 

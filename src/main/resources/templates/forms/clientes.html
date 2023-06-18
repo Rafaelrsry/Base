@@ -10,7 +10,12 @@
           
         <div class="mb-3">
             <h1 class="text-center"> Clientes <span> <img src="img/clasificacion.png" th:src="@{/img/clasificacion.png}" alt=""></span></h1>
-          <button type="button" class="btn btn-primary" id="btnAgregarCliente">Agregar Cliente</button>
+          <button type="button" class="btn btn-primary mb-2" id="btnAgregarCliente">Agregar Cliente</button>
+          
+                <form class="d-flex flex-row">
+      <input class="form-control mr-sm-2" type="search" placeholder="Busca por nombre,apellido o dni" id="palabraclaveCli" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0 btnbusquedaCli" type="submit">Buscar</button>
+    </form>
         </div>
 
         <div class="table-responsive vertscrol">

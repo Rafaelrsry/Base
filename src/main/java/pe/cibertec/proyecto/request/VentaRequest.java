@@ -17,4 +17,5 @@ public class VentaRequest {
 	private Integer vnt_cantidad;
 	
 	private Integer vnt_codigoventa;
+	private double vnt_valorventa;
 }

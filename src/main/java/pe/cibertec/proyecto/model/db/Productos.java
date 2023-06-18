@@ -38,11 +38,11 @@ public class Productos implements Serializable {
 	private String pdt_producto;
 	
 	@Column(name = "pdt_porcion")
-	private Integer pdt_porcion;
+	private double pdt_porcion;
 	
 	
 	@Column(name = "pdt_tortacompleta")
-	private Integer pdt_tortacompleta;
+	private double pdt_tortacompleta;
 	
 	
 	@Column(name = "pdt_precioporcion")

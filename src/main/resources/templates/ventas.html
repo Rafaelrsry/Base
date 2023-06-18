@@ -10,12 +10,54 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" th:href="@{/css/css/sales.css}" >
 	  <script  th:src="@{/js/jquery/jquery-3.6.4.min.js}" type="text/javascript"> </script>
+	  
+	  	<!-- Select -->
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	  
 	  <script th:src="@{js/scripts/encargos.js}" type="text/javascript"></script>
 	<script th:src="@{/js/scripts/app.js}" type="text/javascript"></script>
 	<script th:src="@{js/scripts/ventas.js}" type="text/javascript"></script>
 <title>Tienda de Pasteles |</title>
 </head>
 <body onload="generarCodigoVenta()" onpageshow="generarCodigoVenta()">
+<!--  Modal -->
+
+	<div class="bck ocultar" id="fondonegro">
+			<span> <br></span>
+		</div>
+		
+		
+		
+		<div id="modal" class="modal ocultar">
+  <div class="modal-content">
+    <span class="close" id="cerrarmodelar">&times;</span>
+    <h2>Actualiza Datos del cliente</h2>
+              <form action="" class="formulariocliente">
+       			<label for="">Ingresar Nombres :</label>
+              <input type="text" name="" id="txtNombreCliente">
+
+              <label for="">Ingresar Apellidos :</label>
+              <input type="text" name="" id="txtApellidoCliente">
+
+              <label for="">Ingresar Dni :</label>
+              <input type="text" name="" id="txtDniCliente">
+              <label for="">Ingresar Direccion :</label>
+              <input type="text" name="" id="txtDireccionCliente">
+
+              <label for="">Ingresar Distrito :</label>
+              <input type="text" name="" id="txtDistritoCliente">
+
+              <label for="">Ingresar Telefono :</label>
+              <input type="text" name="" id="txtTelefonoCliente">
+              
+              <label for=""></label>
+              <input type="hidden" id="hddidcliente">
+             <button class="btn btn-success btnmod" type="button" id="btnGuardarClientemod"> Enviar</button>
+            </form>
+  </div>
+</div>
+<!--  Modal -->
 	<header>
 		<h1>App Pasteleria</h1>
 	</header>
@@ -26,11 +68,30 @@
 		<h5>Escoge un cliente:</h5>
 
 
-		<span>Cliente: </span> 
-<select id="cli-sel" name="select">
-<option disabled selected>Escoge el cliente</option>
-  <option th:each="cliente : ${listacliente}" th:value="${cliente.id_clientes}" th:text="${cliente.cli_nombres + ' ' + cliente.cli_apellidos}"></option>
+		<!--  <span>Cliente: </span> -->
+<select class="seleccion-cliente" id="cli-sel" name="select">
+  <option disabled>Escoge el cliente</option>
+  <option th:each="cliente : ${listacliente}" th:value="${cliente.id_clientes}" th:text="${cliente.cli_nombres + ' ' + cliente.cli_apellidos}" th:selected="${cliente.id_clientes == 1}"
+  						th:data-id_clientes="${cliente.id_clientes}"
+						th:data-cli_nombres="${cliente.cli_nombres}"
+						th:data-cli_apellidos="${cliente.cli_apellidos}"
+						th:data-cli_dni="${cliente.cli_dni}"
+						th:data-cli_direccion="${cliente.cli_direccion}"
+						th:data-cli_distrito="${cliente.cli_distrito}"
+						th:data-cli_telefono="${cliente.cli_telefono}"
+  ></option>
 </select>
+
+<div class="preguntas wrapped animate fadeUp ocultar" id="todo"> 
+<div class="box  ">
+<span> ¿Deseas actualizar datos ?</span>
+<div>
+<img class="imgpre btncancelado" th:src="@{/img/canceladomov.gif}" alt="">
+<img class="imgpre btncorrecto" th:src="@{/img/compradomov.gif}" alt="">
+</div>
+</div>
+</div>
+
 	</div>
 	<section class="contenedor">
 		<!-- Contenedor de elementos -->

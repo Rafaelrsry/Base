@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.cibertec.proyecto.model.db.Clientes;
+import pe.cibertec.proyecto.model.db.Productos;
 import pe.cibertec.proyecto.repository.ClienteRepository;
 
 
@@ -27,4 +28,11 @@ public class ClienteService {
 		clienteRepository.deleteById(id_clientes);
 	}
 	
+	public List<Clientes> busqueda(String busqueda){
+		if(busqueda!=null) {
+			return clienteRepository.busqueda(busqueda);
+		}
+		return clienteRepository.findAll();
+	}
+		
 }

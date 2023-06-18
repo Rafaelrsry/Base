@@ -24,10 +24,22 @@ public class VentaService {
 	}
 	
 	public List<Ventas> listarVentas(){
+		
+	
 		return ventaRepository.findAll();
 	}
 	
-	
+	public List<Ventas> busqueda(String busqueda){
+		if(busqueda!=null) {
+			return ventaRepository.busqueda(busqueda);
+		}
+		return ventaRepository.findAll();
+	}
 
-		
+	
+	
+	public void eliminarVenta(Integer id_venta) {
+		ventaRepository.deleteById(id_venta);
+	}
+	
 }

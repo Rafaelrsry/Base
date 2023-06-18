@@ -202,12 +202,13 @@ let modalclientes =  document.getElementById("modale-cli")
 let modalproductos =  document.getElementById("modale-pro")
 let modalempleados =  document.getElementById("modale-emp")
 let modalpregunta = document.getElementById("modale-pregunta")
+let modalpreguntaenc = document.getElementById("modale-preguntaEnc")
 let modalpreguntaemp = document.getElementById("modale-preguntaemp")
 let modalpreguntapro = document.getElementById("modale-preguntaprod")
 let btnAgregarClientes = document.getElementById("btnclientes")
 let btnAgregarProduco = document.getElementById("btnAgregarProduco")
 let btnAgregarEmpleado = document.getElementById("btnAgregarEmpleado")
-
+let cerrarPreguenc = document.getElementById("close-preguEnc")
 let cerrarPregu = document.getElementById("close-pregu")
 let cerrarPreguemp = document.getElementById("close-preguemp")
 let cerrarPreguprod = document.getElementById("close-pregupro")
@@ -231,8 +232,14 @@ btnAgregarEmpleado.addEventListener('click',()=> {
   
 })
 
-cerrarPreguemp.addEventListener('click',()=> {
+cerrarPreguenc.addEventListener('click',()=> {
+	editCSSdos()
+	modalpreguntaenc.classList.add('ocultar')
+  fondo.classList.add('ocultar')
+})
 
+cerrarPreguemp.addEventListener('click',()=> {
+	editCSSdos()
 	modalpreguntaemp.classList.add('ocultar')
   fondo.classList.add('ocultar')
 })
@@ -240,13 +247,13 @@ cerrarPreguemp.addEventListener('click',()=> {
 
 
 cerrarPregu.addEventListener('click',()=> {
-
+	editCSSdos()
 	modalpregunta.classList.add('ocultar')
   fondo.classList.add('ocultar')
 })
 
 cerrarPreguprod.addEventListener('click',()=> {
-
+	editCSSdos()
 	modalpreguntapro.classList.add('ocultar')
   fondo.classList.add('ocultar')
 })
@@ -289,6 +296,21 @@ function actualizarPorciones() {
   porcionesInput.value = porciones;
 }
 
+//Obtener referencias a los elementos del formulario
+var precioPorcionInput = document.getElementById('txtprecioporcion');
+var precioTortaCompletaInput = document.getElementById('txtprecioentera');
+
+// Escuchar el evento de entrada en el precio de la porción
+precioPorcionInput.addEventListener('input', function() {
+  var precioPorcion = parseFloat(precioPorcionInput.value);
+  
+  // Calcular el precio de la torta completa y aplicar descuento del 20%
+  var precioTortaCompleta = (precioPorcion * 20) * 0.8;
+
+  // Actualizar el valor del precio de la torta completa en el formulario
+  precioTortaCompletaInput.value = precioTortaCompleta.toFixed(2);
+});
+
 
 
 
@@ -305,3 +327,24 @@ $(document).ready(function() {
       lector.readAsDataURL(archivo);
     });
   });
+
+
+function editCSS() {
+    // Obtener el elemento a editar
+    var element = $(".modale");
+
+    
+    element.css("height", "150px");
+    
+
+}
+
+function editCSSdos() {
+    // Obtener el elemento a editar
+    var element = $(".modale");
+
+    
+    element.css("height", "460px");
+    
+
+}

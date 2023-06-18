@@ -2,7 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-
+      <!-- Modal eliminar -->
+            <div th:fragment="eliminarEnc" id="modale-preguntaEnc" class="modale ocultar" >
+        <div class="modale-header">
+          
+            <h5> <div id="TituloEnc">Eliminando Encargo</div>   <span id="close-preguEnc">X</span></h5>
+        </div>
+        <div class="modale-body">
+        <div>
+        	<label id="mensajeeliminarEnc"></label>
+					<input type="hidden" id="hddideliminarencargo" value="0">
+						<button type="button" class="btn btn-primary btneliminaren"
+						>Eliminar</button>
+        </div>
+        </div>
+      </div>
+      
+       <!-- Modal eliminar -->
 
 </body>
 </html>

@@ -8,7 +8,13 @@
         
         <div class="mb-3">
           <h1 class="text-center"> Productos <span> <img src="img/paquete.png"  th:src="@{/img/paquete.png}" alt=""></span></h1>
-        <button type="button" class="btn btn-primary" id="btnAgregarProduco">Agregar Producto</button>
+        <button type="button" class="btn btn-primary mb-2" id="btnAgregarProduco">Agregar Producto</button>
+        
+         <form class="d-flex flex-row">
+      <input class="form-control mr-sm-2" type="search" placeholder="Busca por nombre o precio" id="palabraclave" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0 btnbusqueda" type="submit">Buscar</button>
+    </form>
+    
       </div>
 
       <div class="table-responsive vertscrol">

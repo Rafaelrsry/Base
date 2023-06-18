@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pe.cibertec.proyecto.model.db.Clientes;
 import pe.cibertec.proyecto.model.db.TipoUsuario;
 import pe.cibertec.proyecto.model.db.Usuarios;
 import pe.cibertec.proyecto.request.ClienteRequest;
@@ -67,6 +69,13 @@ public class UsuariosController {
 				.mensaje(mensaje)
 				.respuesta(respuesta)
 				.build();
+	}
+	
+	
+	@GetMapping("/listarbusqueda")
+	@ResponseBody
+	public List<Usuarios> listarbusqueda(@RequestParam("busqueda") String busqueda){
+		return usuarioService.busqueda(busqueda);
 	}
 	
 	

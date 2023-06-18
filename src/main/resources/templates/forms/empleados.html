@@ -15,8 +15,12 @@
         <div class="mb-3">
           <h1 class="text-center"> Empleados <span> <img src="img/paquete.png" th:src="@{/img/headhunting.png}" alt=""></span></h1>
 
-        <button type="button" class="btn btn-primary" id="btnAgregarEmpleado">Agregar Empleado</button>
+        <button type="button" class="btn btn-primary mb-2" id="btnAgregarEmpleado">Agregar Empleado</button>
 
+                <form class="d-flex flex-row">
+      <input class="form-control mr-sm-2" type="search" placeholder="Busca por usuario,nombre o apellido" id="palabraclaveEmp" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0 btnbusquedaEmp" type="submit">Buscar</button>
+    </form>
       </div>
 
       <div class="table-responsive vertscrol">

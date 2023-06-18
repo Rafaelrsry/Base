@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import pe.cibertec.proyecto.model.db.Clientes;
 import pe.cibertec.proyecto.model.db.Usuarios;
 import pe.cibertec.proyecto.repository.UsuarioRepository;
 
@@ -28,4 +28,13 @@ public class UsuarioService {
 	public void eliminarUsuario(Integer id_usuario) {
 		usuarioRepository.deleteById(id_usuario);
 	}
+	
+	
+	public List<Usuarios> busqueda(String busqueda){
+		if(busqueda!=null) {
+			return usuarioRepository.busqueda(busqueda);
+		}
+		return usuarioRepository.findAll();
+	}
+		
 }

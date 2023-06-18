@@ -8,7 +8,7 @@
 
 
 $(document).on("click", "#btnAgregarCliente", function(){
-	
+	editCSSdos()
 	$("#txtNombreCliente").val("");
 	$("#txtApellidoCliente").val("");
 	$("#txtNombreCliente").val("");
@@ -58,6 +58,7 @@ modalclientes.classList.remove('ocultar')
 
 
 $(document).on("click",".btneliminarCliente",function(){
+	editCSS()
 	$("#hddideliminarcliente").val("");
 	$("#hddideliminarcliente").val($(this).attr("data-id_clientes"));
 	$("#mensajeeliminar").text("¿Está seguro de eliminar al cliente "+ 
@@ -180,3 +181,52 @@ function ListarClientes(){
 }
 
 
+
+
+$(document).on("click", ".btnbusquedaCli", function(e){
+	e.preventDefault();
+	
+	var busqueda = $('#palabraclaveCli').val();
+
+	$.ajax({
+		type: "GET",
+		url: "/cliente/listarbusqueda",
+		data: { busqueda: busqueda },
+		success: function(resultado){
+			//console.log(resultado);
+			$("#tableclientes > tbody").html("");
+			$.each(resultado, function(index, value){
+				$("#tableclientes > tbody").append("<tr>"+
+						"<td>"+value.id_clientes+"</td>"+
+						"<td>"+value.cli_nombres+"</td>"+
+						"<td>"+value.cli_apellidos+"</td>"+
+						"<td>"+value.cli_dni+"</td>"+
+						"<td>"+value.cli_direccion+"</td>"+
+						"<td>"+value.cli_distrito+"</td>"+
+						"<td>"+value.cli_telefono+"</td>"+
+						"<td>"+
+							"<button type='button' class='btn btn-light btnactualizarCliente'"+
+							"data-id_clientes='"+value.id_clientes+"'"+
+							"data-cli_nombres='"+value.cli_nombres+"'"+
+							"data-cli_apellidos='"+value.cli_apellidos+"'"+
+							"data-cli_dni='"+value.cli_dni+"'"+
+							"data-cli_direccion='"+value.cli_direccion+"'"+
+							"data-cli_distrito='"+value.cli_distrito+"'"+
+							"data-cli_cli_telefono='"+value.cli_telefono+"'"+
+							"><img class='imgtabla' src='img/editar.png'  th:src='@{/img/editar.png}' alt=''></button></td>"+
+						"<td>"+
+							"<button type='button' class='btn btn-danger btneliminarCliente'"+	
+							" data-id_clientes='"+value.id_clientes+"'"+
+							" data-cli_nombres='"+value.cli_nombres+"'"+
+							" data-cli_apellidos='"+value.cli_apellidos+"'"+
+							"><img class='imgtabla' src='img/borrar.png'  th:src='@{/img/borrar.png}' alt=''></button></td>"+							
+						"</tr>")
+			})
+			
+			
+		}
+	})
+
+
+
+})
