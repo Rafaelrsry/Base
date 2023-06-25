@@ -164,8 +164,8 @@ function ListarEmpleados(){
 			$.each(resultado, function(index, value){
 				$("#tableempleados > tbody").append("<tr>"+
 						"<td>"+value.id_usuario+"</td>"+
-						"<td>"+value.us_usuario+"</td>"+
-						"<td>"+value.us_pass+"</td>"+
+						"<td>"+value.ususuario+"</td>"+
+						"<td>"+value.uspass+"</td>"+
 						"<td>"+value.us_nombres+"</td>"+
 						"<td>"+value.us_apellidos+"</td>"+
 						"<td>"+value.us_ventas+"</td>"+
@@ -173,8 +173,8 @@ function ListarEmpleados(){
 						"<td>"+
 							"<button type='button' class='btn btn-light btnactualizarUsuario'"+
 							"data-id_usuario='"+value.id_usuario+"'"+
-							"data-us_usuario='"+value.us_usuario+"'"+
-							"data-us_pass='"+value.us_pass+"'"+
+							"data-us_usuario='"+value.ususuario+"'"+
+							"data-us_pass='"+value.uspass+"'"+
 							"data-us_nombres='"+value.us_nombres+"'"+
 							"data-us_apellidos='"+value.us_apellidos+"'"+
 							"data-us_ventas='"+value.us_ventas+"'"+

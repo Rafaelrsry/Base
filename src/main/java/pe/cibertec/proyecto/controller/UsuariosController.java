@@ -3,6 +3,7 @@ package pe.cibertec.proyecto.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,9 @@ public class UsuariosController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	private BCryptPasswordEncoder 
+	bCryptPasswordEncoder = 
+		new BCryptPasswordEncoder();
 	
 	@GetMapping("/listarUsuarios")
 	@ResponseBody
@@ -52,13 +56,15 @@ public class UsuariosController {
 			}
 			
 			objUsuario.setUsusuario(usuarioRequest.getUs_usuario());
-			objUsuario.setUspass(usuarioRequest.getUs_pass());
+			objUsuario.setUspass(bCryptPasswordEncoder
+					.encode(usuarioRequest.getUs_pass()));
 			objUsuario.setUs_nombres(usuarioRequest.getUs_nombres());
 			objUsuario.setUs_apellidos(usuarioRequest.getUs_apellidos());
 			objUsuario.setUs_ventas(usuarioRequest.getUs_ventas());
 			objtipous.setIdtipousuario(usuarioRequest.getUs_tipo());
 			//objUsuario.setUs_tipo(usuarioRequest.getUs_tipo());
 			objUsuario.setTipousuario(objtipous);
+			objUsuario.setActivo(true);
 			usuarioService.registrarUsuario(objUsuario);
 			
 		}catch(Exception ex) {
