@@ -88,7 +88,38 @@ $(document).on("click", ".btneliminarus", function(){
 
 
 $(document).on("click", "#btnGuardarEmpleado", function(e){
+	
 	e.preventDefault();
+	
+	   function validarCampoObligatorio(campo, mensajeError) {
+	    	  if ($(campo).val() === "") {
+	    	    $(mensajeError).text("Es obligatorio");
+	    	  } else {
+	    	    $(mensajeError).text("");
+	    	  }
+	    	}
+	   
+	   validarCampoObligatorio("#txtusuario", "#erroruser");
+	   validarCampoObligatorio("#txtpassword", "#errorcontra");
+	   validarCampoObligatorio("#txtnombres", "#errornomem");
+	   validarCampoObligatorio("#txtapellidos", "#errorapem");
+	   validarCampoObligatorio("#txtventas", "#errorventaem");
+	   validarCampoObligatorio("#txttipo", "#errortipoem");
+	  
+	   
+
+	    if($("#txtusuario").val() != "" 
+			&& $("#txtpassword").val() != ""
+				&& $("#txtnombres").val() != ""
+					&& $("#txtapellidos").val() != ""
+						&& $("#txtventas").val() != ""
+							&& $("#txttipo").val() != ""){
+	    	
+	    	
+	    
+	   
+	
+	
 	$.ajax({
 		type: "POST",
 		url: "/usuario/registrarUsuario",
@@ -116,6 +147,8 @@ $(document).on("click", "#btnGuardarEmpleado", function(e){
 	
 	  modalempleados.classList.add('ocultar')
 	  fondo.classList.add('ocultar')
+	  
+	    }
 })
 
 

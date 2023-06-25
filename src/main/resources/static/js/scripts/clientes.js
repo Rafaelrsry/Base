@@ -104,6 +104,56 @@ $(document).on("click", ".btneliminar", function(){
 
 $(document).on("click", "#btnGuardarCliente", function(){
 	
+	
+	if($("#txtNombreCliente").val() == ""){
+		$("#errornombre").text("Es obligatorio el nombre.");
+	}else{
+		$("#errornombre").text("");
+	}
+	
+	if($("#txtApellidoCliente").val() == ""){
+		$("#errorapellido").text("Es obligatorio el apellido.");
+	}else{
+		$("#errorapellido").text("");
+	}
+	
+	if($("#txtDniCliente").val() == ""){
+		$("#errordni").text("Es obligatorio el dni.");
+	}else{
+		$("#errordni").text("");
+	}
+	
+	if($("#txtDireccionCliente").val() == ""){
+		$("#errordireccion").text("Es obligatorio la direccion.");
+	}else{
+		$("#errordireccion").text("");
+	}
+	
+	if($("#txtDistritoCliente").val() == ""){
+		$("#errordistrito").text("Es obligatorio el distrito.");
+	}else{
+		$("#errordistrito").text("");
+	}
+	
+	
+	if($("#txtTelefonoCliente").val() == ""){
+		$("#errortelefono").text("Es obligatorio el distrito.");
+	}else{
+		$("#errortelefono").text("");
+	}
+	
+	if($("#txtNombreCliente").val() != "" 
+		&& $("#txtApellidoCliente").val() != ""
+			&& $("#txtDniCliente").val() != ""
+				&& $("#txtDireccionCliente").val() != ""
+					&& $("#txtDistritoCliente").val() != ""
+						&& $("#txtTelefonoCliente").val() != ""){
+		
+		
+		
+		
+	
+	
 	$.ajax({
 		type: "POST",
 		url: "/cliente/registrarCliente",
@@ -133,6 +183,8 @@ $(document).on("click", "#btnGuardarCliente", function(){
 	
 	  modalclientes.classList.add('ocultar')
 	  fondo.classList.add('ocultar')
+	  
+	}
 })
 
 

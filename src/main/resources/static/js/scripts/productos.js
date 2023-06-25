@@ -139,6 +139,39 @@ $(document).on("click", ".btnactualizarProducto", function(){
 
 $(document).on("click", "#btnGuardarProducto", function(e) {
     e.preventDefault();
+    
+    function validarCampoObligatorio(campo, mensajeError) {
+    	  if ($(campo).val() === "") {
+    	    $(mensajeError).text("Es obligatorio");
+    	  } else {
+    	    $(mensajeError).text("");
+    	  }
+    	}
+    
+    
+    validarCampoObligatorio("#arch", "#errorfoto");
+    validarCampoObligatorio("#txtproducto", "#errornompro");
+    validarCampoObligatorio("#txtentera", "#errortortaentera");
+    validarCampoObligatorio("#txtporciones", "#errorporciones");
+    validarCampoObligatorio("#txtprecioporcion", "#errorprecioporcion");
+    validarCampoObligatorio("#txtprecioentera", "#errorprecioentera");
+    validarCampoObligatorio("#txtcodigo", "#errorcodigo");
+    
+  
+    
+    
+    if($("#txtproducto").val() != "" 
+		&& $("#txtentera").val() != ""
+			&& $("#txtporciones").val() != ""
+				&& $("#txtprecioporcion").val() != ""
+					&& $("#txtprecioentera").val() != ""
+						&& $("#txtcodigo").val() != ""){
+    	
+    	
+    
+    
+    
+    
     var inputFileImage = document.getElementById("arch");
     var file = inputFileImage.files[0];
     var data = new FormData();
@@ -186,7 +219,7 @@ $(document).on("click", "#btnGuardarProducto", function(e) {
         console.error("Error en la carga del archivo:", textStatus, errorThrown);
     });
     
-
+    }
 });
 
 

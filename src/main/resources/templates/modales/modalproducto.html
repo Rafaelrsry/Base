@@ -19,27 +19,37 @@
                 <label for="">Ingresar Foto :</label>
                 <di id="imgcon"><img style="display: none;"  src="" alt="" id="imagedefe"></di>
                 <input type="file" name="" id="arch">
-  
+  				<span id="errorfoto" class="text-danger"></span>
   
  				 <input type="hidden" name="" id="nomfoto">
                 <label for="">Ingresar Nombre Producto :</label>
                 <input type="text" name="" id="txtproducto">
+               	<span id="errornompro" class="text-danger"></span>
+                
                 
                  <label for="">Ingresar Tortas Enteras:</label>
                 <input type="number" name="" id="txtentera" oninput="actualizarPorciones()">
+  				<span id="errortortaentera" class="text-danger"></span>
+  
   
                 <label for="">Ingresar Cuantas Porciones:</label>
                 <input type="number" name="" id="txtporciones" oninput="actualizarEntera()">
-  
+  				<span id="errorporciones" class="text-danger"></span>
   
                 <label for="">Precio de Porcion:</label>
                 <input type="number" name="" id="txtprecioporcion">
+  				<span id="errorprecioporcion" class="text-danger"></span>
+  
   
                 <label for="">Precio Torta Completa :</label>
                 <input type="number" name="" id="txtprecioentera">
+                <span id="errorprecioentera" class="text-danger"></span>
+                
                 
                 <label for="">Codigo :</label>
               	<input type="text" name="" id="txtcodigo">
+              	<span id="errorcodigo" class="text-danger"></span>
+              
               
               	<input type="hidden" id="hddidproducto">
               	<button class="btn btn-success btnmod" type="submit" id="btnenviaractualizacionProducto"> Actualizar</button>

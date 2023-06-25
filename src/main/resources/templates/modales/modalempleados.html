@@ -15,23 +15,30 @@
                         
                         <label for="">Ingresar Usuario :</label>
                         <input type="text" name="" id="txtusuario">
+                        <span id="erroruser" class="text-danger"></span>
                         
                         <label for="">Ingresar Contraseña :</label>
                         <input type="text" name="" id="txtpassword">
+          				<span id="errorcontra" class="text-danger"></span>
           
                         <label for="">Ingresar Nombres:</label>
                         <input type="text" name="" id="txtnombres">
+                        <span id="errornomem" class="text-danger"></span>
 
                         <label for="">Ingresar Apellidos:</label>
                         <input type="text" name="" id="txtapellidos">
-          
+          				<span id="errorapem" class="text-danger"></span>
+          				
                         <label for="">Ingresar Ventas:</label>
                         <input type="number" name="" id="txtventas" >
+          				<span id="errorventaem" class="text-danger"></span>
           
                         <label for="">Tipo de usuario:</label>
                         <select name="" id="txttipo">
                            <option th:each="tipousuario : ${listatipouser}" th:value="${tipousuario.idtipousuario}" th:text="${tipousuario.rolusuario}"></option>
                         </select>
+						<span id="errortipoem" class="text-danger"></span>
+
 
                         <label for=""> <br></label>
           
