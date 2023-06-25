@@ -1,10 +1,64 @@
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Pasteleria</title>
+    
+        <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/css/normalize.css}" >
+  	<link rel="stylesheet" th:href="@{/css/css/style.css}" >
+  	<link rel="stylesheet" th:href="@{/css/fontawesome/all.css}">
+  	
+  	
+
 </head>
 <body>
+    <div class="container w-75 bg-light mt-5 rounded shadow">
+        <div class="row align-items-stretch">
+            <!-- 1 -->
+            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6">
+                
+            </div>
+             <!-- 2 -->
+            <div class="col bg-white p-5 rounded-end">
+             
+                 
+                 <h2 class="fw-bold text-center py-5">Bienvenido</h2>
 
+                 <!-- Login-->
+                 <form method="post" th:action="@{/auth/login}">
+                    <div class="mb-4">
+                        <label for="txtusuario" class="form-label">Usuario</label> 
+                        <input type="text" name="txtusuario" id="txtusuario" class="form-control"> 
+                    </div>
+                    <div class="mb-4">
+                        <label for="txtpassword" class="form-label">Contraseña</label> 
+                        <input type="password" name="txtpassword" id="txtpassword" class="form-control"> 
+                    </div>
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" name="connected" class="form-check-input" id="">
+                        <label for="connected" class="form-check-label">Recordarme </label>
+                    </div>
+				<div th:if="${param.error}" class="alert alert-danger" role="alert">
+				  Usuario o Password incorrecto.
+				</div>	
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary"> Iniciar Sesión </button>
+                    </div>
+                    <div class="my-3">
+                        <span><a href="#">Recuperar Contraseña</a></span>
+                    </div>
+                 </form>
+            </div>
+        </div>
+
+    </div>
+
+
+   
 </body>
 </html>

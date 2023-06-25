@@ -43,6 +43,10 @@ public class HomeController {
 	@Autowired
 	private DetalleVentaService detalleventaService;
 	
+	@GetMapping("/login")
+	public String log() {
+		return "login";
+	}
 	
 	@GetMapping({"/inicio","/","/home","/index"})
 	public String listadoTotal(Model model) {

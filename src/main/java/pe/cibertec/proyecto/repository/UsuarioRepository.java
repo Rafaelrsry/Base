@@ -9,11 +9,22 @@ import org.springframework.stereotype.Repository;
 import pe.cibertec.proyecto.model.db.Usuarios;
 
 
+
+
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuarios, Integer>{
+	
+	
+   
+    Usuarios findByususuario(String username);
+    
+    
 
-	@Query("SELECT u FROM Usuarios u WHERE u.us_usuario LIKE %?1% "
+	@Query("SELECT u FROM Usuarios u WHERE u.ususuario LIKE %?1% "
             + "OR u.us_nombres LIKE %?1% "
             + "OR u.us_apellidos LIKE %?1%")
 	List<Usuarios> busqueda(String busqueda);
+	
+	
+	
 }

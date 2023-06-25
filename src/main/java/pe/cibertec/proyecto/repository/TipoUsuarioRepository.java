@@ -13,5 +13,6 @@ import pe.cibertec.proyecto.service.TipoUsuarioService;
 @Repository
 public interface TipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer>{
 
+	TipoUsuario findByrolusuario(String rolname);
 
 }

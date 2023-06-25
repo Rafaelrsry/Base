@@ -51,8 +51,8 @@ public class UsuariosController {
 				objUsuario.setId_usuario(usuarioRequest.getId_usuario());
 			}
 			
-			objUsuario.setUs_usuario(usuarioRequest.getUs_usuario());
-			objUsuario.setUs_pass(usuarioRequest.getUs_pass());
+			objUsuario.setUsusuario(usuarioRequest.getUs_usuario());
+			objUsuario.setUspass(usuarioRequest.getUs_pass());
 			objUsuario.setUs_nombres(usuarioRequest.getUs_nombres());
 			objUsuario.setUs_apellidos(usuarioRequest.getUs_apellidos());
 			objUsuario.setUs_ventas(usuarioRequest.getUs_ventas());
